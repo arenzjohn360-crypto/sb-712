@@ -783,3 +783,45 @@ Everything serves the doctrine:
 - No active state becomes trusted state without verification.
 - Nothing touches the Spine.
 - Trust is earned, proven, monitored, and re-proven.
+
+---
+
+## Market-Ready v1 Scope
+
+### Target SKU
+
+- Primary SKU: Python library kernel (`sb688`) with SB712 orchestration modules.
+- Operational runtime layer: `sb_712` trust-gate, recovery, learning, and immunity components.
+
+### v1 Included
+
+- Verification-first trust-gate pipeline (classify → verify ×3 → certify → clip).
+- Quarantine/isolation state handling for untrusted objects.
+- Recovery convoy + rollback fallback.
+- Append-only proof ledger and heartbeat health signals.
+- Stress/chaos/extreme-environment regression suite in `tests/`.
+
+### v1 Non-Goals
+
+- Networked control plane service.
+- Distributed remote node scheduler.
+- External SaaS dashboard.
+
+### Versioning / Release / Support Policy
+
+- Versioning: semantic versioning (`MAJOR.MINOR.PATCH`).
+- Branch stability: `0.x` may change APIs; `1.x` locks public API compatibility for minor releases.
+- Support window: latest minor + previous minor receive fixes.
+- Security fixes: prioritized for supported lines and documented in release notes.
+
+---
+
+## Unified System API (Phase 2/3 Implementation Slice)
+
+The `sb_712.system` module now provides executable building blocks for the unified architecture:
+
+- `SystemConfig` for validated runtime policy and safety defaults.
+- `TrustGatePipeline` for strict verification and clip-gate decisions.
+- `QuarantineRecord` / `QuarantineState` for explicit isolation flow.
+- `ProofLedger` for tamper-evident append-only proof events.
+- `HeartbeatMonitor` / `SystemHealth` for integrity-level monitoring.

@@ -26,6 +26,21 @@ from .recovery import (
 from .learning_node import LearningNode
 from .immunity_node import ImmunityNode
 from .report import generate_report
+from .system import (
+    ClassificationStage,
+    TrustStatus,
+    QuarantineState,
+    HeartbeatLevel,
+    SystemConfig,
+    VerificationEvidence,
+    QuarantineRecord,
+    LedgerEntry,
+    ProofLedger,
+    TrustGateResult,
+    SystemHealth,
+    HeartbeatMonitor,
+    TrustGatePipeline,
+)
 
 __all__ = [
     "IncidentStudyRecord",
@@ -56,4 +71,17 @@ __all__ = [
     "LearningNode",
     "ImmunityNode",
     "generate_report",
+    "ClassificationStage",
+    "TrustStatus",
+    "QuarantineState",
+    "HeartbeatLevel",
+    "SystemConfig",
+    "VerificationEvidence",
+    "QuarantineRecord",
+    "LedgerEntry",
+    "ProofLedger",
+    "TrustGateResult",
+    "SystemHealth",
+    "HeartbeatMonitor",
+    "TrustGatePipeline",
 ]
