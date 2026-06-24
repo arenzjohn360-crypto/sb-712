@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "RAD-PROFILE-001",
+  "description": "Fault model for SB-712 radiation-style threat simulation",
+  "fault_classes": [
+    {
+      "id": "BIT_FLIP_FILE",
+      "description": "Single-bit corruption in a data file",
+      "detection": "hash_mismatch",
+      "response": ["quarantine", "restore_from_replica"],
+      "severity": "medium"
+    },
+    {
+      "id": "BIT_FLIP_LEDGER",
+      "description": "Single-bit corruption in the ledger chain",
+      "detection": "hash_chain_break",
+      "response": ["stop_promotion", "rebuild_from_mirror"],
+      "severity": "critical"
+    },
+    {
+      "id": "BIT_FLIP_MEMORY",
+      "description": "Transient bit flip in RAM",
+      "detection": "ram_guard_warning",
+      "response": ["checkpoint_freeze", "process_restart"],
+      "severity": "high"
+    },
+    {
+      "id": "CORRUPT_CHECKPOINT",
+      "description": "Damaged or poisoned checkpoint",
+      "detection": "checkpoint_hash_mismatch",
+      "response": ["reject_checkpoint", "fallback_to_older_certified"],
+      "severity": "critical"
+    },
+    {
+      "id": "NODE_FAILURE",
+      "description": "A node becomes unresponsive or returns invalid state",
+      "detection": "heartbeat_miss",
+      "response": ["isolate_node", "route_around_via_braid"],
+      "severity": "high"
+    },
+    {
+      "id": "REPEATED_CORRUPTION",
+      "description": "Multiple faults detected in short window",
+      "detection": "fault_rate_threshold",
+      "response": ["enter_degraded_readonly_survival_mode"],
+      "severity": "critical"
+    },
+    {
+      "id": "STORAGE_DAMAGE",
+      "description": "Storage medium degradation or failure",
+      "detection": "read_error",
+      "response": ["restore_from_cold_storage", "restore_from_offline_pocket"],
+      "severity": "high"
+    },
+    {
+      "id": "AI_HALLUCINATION",
+      "description": "Intelligence layer produces an unverifiable action recommendation",
+      "detection": "vera_arbitration_fail",
+      "response": ["block_action", "log_event", "request_owner_confirmation"],
+      "severity": "high"
+    },
+    {
+      "id": "MALICIOUS_COMMAND",
+      "description": "Hostile or unsafe command submitted for execution",
+      "detection": "semantic_gate_block",
+      "response": ["block_before_runtime", "log_event"],
+      "severity": "critical"
+    },
+    {
+      "id": "SNAPSHOT_POISONING",
+      "description": "Checkpoint lineage test detects injected false state",
+      "detection": "lineage_continuity_fail",
+      "response": ["reject_snapshot", "revert_to_certified_ancestor"],
+      "severity": "critical"
+    }
+  ],
+  "thresholds": {
+    "fault_rate_window_seconds": 300,
+    "fault_rate_max_per_window": 5,
+    "heartbeat_miss_threshold_seconds": 60
+  }
+}

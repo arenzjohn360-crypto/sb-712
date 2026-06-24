@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "ledger_head_id": "LEDGER-HEAD-001",
+  "current_hash": null,
+  "previous_hash": null,
+  "sequence": 0,
+  "state": "GENESIS",
+  "last_entry_at": null,
+  "mirror_a_hash": null,
+  "mirror_b_hash": null,
+  "mirror_agreement": false,
+  "notes": "Initialized at genesis. Populated by ledger operations."
+}
