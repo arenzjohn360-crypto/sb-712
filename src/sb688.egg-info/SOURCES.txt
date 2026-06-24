@@ -38,3 +38,4 @@ tests/test_recovery.py
 tests/test_report.py
 tests/test_self_healing.py
 tests/test_space_environments.py
+tests/test_system.py
