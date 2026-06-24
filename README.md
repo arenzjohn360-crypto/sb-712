@@ -587,3 +587,199 @@ Phoenix / Spine Update
 ### Clean One-Line Definition
 
 SB712 is a braided, mesh-protected, node-driven, self-healing integrity system where every file, command, update, and recovery state must be isolated, verified, repaired, certified, and learned from before it can touch the trusted Spine.
+
+---
+
+## Unified Architecture (SB688 + SB689 + SB699 + SB700 + SB701 + SB712 V3)
+
+If SB688, SB689, SB699, SB700, SB701, and SB712 V3 are merged into one architecture, the result is a complete operating framework rather than only a data integrity system.
+
+### Layer 0: Sovereign Law (SB688)
+
+Core laws:
+
+1. Nothing touches the Spine.
+2. No active state becomes trusted state without verification.
+3. Unknown data must be isolated.
+4. Verify three times before trust.
+5. Trust can be revoked.
+6. Every action leaves proof.
+
+Everything else is built on these laws.
+
+### Layer 1: Spine
+
+The protected truth backbone stores trusted manifests, trusted checkpoints, verified system law, recovery anchors, and proof references.
+
+The Spine never processes raw data; it only receives trusted results.
+
+### Layer 2: Classification Engine
+
+Every incoming object follows:
+
+Unknown → Observed → Studied → Classified → Verified → Trusted → Law
+
+Nothing skips stages.
+
+### Layer 3: Triple Verification
+
+- Truth Nodes: Is it true?
+- Verification Nodes: Is it correct?
+- Certification Nodes: Can it become trusted?
+
+All three must agree.
+
+### Layer 4: Clip Brick Gateway
+
+Even trusted information must pass:
+
+Verified → Clip Brick → Approved → Connected
+
+Verified does not automatically mean accepted.
+
+### Layer 5: Cubic Brick Isolation
+
+Unknown or hostile data is isolated, studied, repaired, purged, or archived.
+
+Nothing escapes until resolved.
+
+### Layer 6: Braided Intelligence Core
+
+Current design uses a 66-strand core braid containing:
+
+- Knowledge
+- Wisdom
+- Understanding
+- Love
+- Life
+- Loyalty
+- Memory
+- Learning
+- Context
+
+Bound by three logic strands:
+
+- Verification
+- Recovery
+- Law
+
+### Layer 7: Knot Anchors
+
+Knot anchors provide stability points, recovery points, memory anchors, and synchronization points to prevent drift.
+
+### Layer 8: Memory Pocket System
+
+Verified memory only, storing lessons, patterns, manifests, recovery recipes, and historical behavior while reducing RAM load.
+
+### Layer 9: Compression Braid
+
+Large memory is compressed into pocket storage to support low-resource systems, including 8GB-class machines.
+
+### Layer 10: RAM Guard
+
+RAM Guard protects active memory and controls process priority, scan scheduling, memory pressure, and cold storage usage to keep core services alive.
+
+### Layer 11: Liquid Node Streams
+
+Continuous circulatory flows:
+
+- Liquid Truth
+- Liquid Verification
+- Liquid Hunter
+- Liquid Repair
+- Liquid Cleaner
+
+### Layer 12: Hunter Network
+
+Proactive detection searches for corruption, drift, unexpected changes, hostile behavior, and broken dependencies.
+
+Doctrine: We do not wait for corruption. We hunt it.
+
+### Layer 13: Watchdog Network
+
+Continuous observation of processes, files, services, startup entries, and memory behavior; escalates to Hunters.
+
+### Layer 14: Warrior Network
+
+Rapid response on danger detection: isolate, freeze, contain, defend.
+
+### Layer 15: Repair Network
+
+Rebuilds files, manifests, dependencies, and configurations from trusted references.
+
+### Layer 16: Cleaner Network
+
+Removes debris, residue, temporary contamination, and orphaned artifacts only after proof capture.
+
+### Layer 17: Health Node Network
+
+Monitors braid, memory, mesh, node, storage, and heartbeat health and produces health reports.
+
+### Layer 18: Heartbeat System
+
+Global integrity indicator tracking operational state, node readiness, recovery readiness, and trust levels to coordinate all nodes.
+
+### Layer 19: Phoenix Resurrection System
+
+Triangle architecture with three synchronized Phoenix masters, each with full system map, recovery plans, and trusted checkpoints.
+
+Rotating update cycle:
+
+Node A → Dormant → Node B → Dormant → Node C → Dormant
+
+### Layer 20: Ghost Recovery Layer
+
+Maintains snapshots, rollback points, manifests, and trusted references to support Phoenix recovery.
+
+### Layer 21: Double Linked Cage Mesh
+
+Protective shell preventing contamination, intrusion, drift, and direct access.
+
+### Layer 22: Skull Mesh
+
+Outer intelligence shield with silence bricks, verification bricks, chain structures, and trust gates protecting the braid.
+
+### Layer 23: Anchor Grid
+
+System-wide coordinate system providing known-good references, location awareness, trust alignment, and repair targets.
+
+### Layer 24: Qubex Pairing
+
+Every critical node has an independent pair (Node 1 and Node 2), and their results are compared before trust.
+
+### Layer 25: Return Check System
+
+After repair:
+
+Certification → Hunter Rescan → Truth Recheck → Verification Recheck → Phoenix Confirmation
+
+Problems must remain solved.
+
+### Layer 26: Incident Learning Layer
+
+Every event becomes knowledge, recording source, path, damage, repair, and outcome to produce immunity rules.
+
+### Layer 27: Immutable Ledger
+
+Append-only storage for proof reports, node actions, certifications, and repair history.
+
+### Layer 28: Universal Data Integrity Cycle
+
+Unknown → Observe → Classify → Isolate → Verify → Verify → Verify → Certify → Clip Brick → Trust → Monitor → Learn → Store → Protect
+
+### Final Unified Purpose
+
+The merged SB688/SB689/SB699/SB700/SB701/SB712-V3 architecture is a verification-first, braid-centered, mesh-protected, self-healing integrity framework built to:
+
+- prevent untrusted data from becoming trusted
+- continuously hunt corruption
+- survive failures
+- restore from trusted states
+- learn from incidents
+- maintain provable integrity over time
+
+Everything serves the doctrine:
+
+- No active state becomes trusted state without verification.
+- Nothing touches the Spine.
+- Trust is earned, proven, monitored, and re-proven.
