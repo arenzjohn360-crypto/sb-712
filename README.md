@@ -105,3 +105,485 @@ pytest tests/ -q
 | Self-healing | Automatic from replica or ECC parity |
 | Audit trail integrity | Tamper-evident chained SHA-256 |
 | Idempotent repair | Guaranteed |
+
+---
+
+## SB712 Breakdown
+
+SB712 is your resilience engine: a braided, verified, self-healing data integrity system built to survive failure, corruption, bad files, power loss, and hostile environments.
+
+At the center:
+
+- No active state becomes trusted state without verification.
+- Nothing touches the Spine unless proven clean.
+
+### 1. The Spine
+
+The Spine is the protected truth backbone.
+
+It holds:
+
+- trusted system state
+- verified manifests
+- clean checkpoints
+- approved runtime law
+- recovery anchors
+- proof ledger references
+
+Rule: nothing raw, unknown, corrupted, or unverified touches it.
+
+Everything must pass through gates first.
+
+### 2. The Main Braid
+
+The braid is the living logic brain around the Spine.
+
+Current SB712 model:
+
+- 66-strand braid
+- tightened by 3 thick logic strands
+- carries:
+  - knowledge
+  - wisdom
+  - understanding
+  - loyalty
+  - life
+  - emotional/speech simulation branch
+  - memory pockets
+  - recovery logic
+
+It does not replace the Spine.
+It hovers around it, guards it, verifies around it, repairs around it.
+
+Think of it as the armored nervous system.
+
+### 3. The 3 Logic Strands
+
+These are the binding strands that keep SB712 from becoming chaos.
+
+Logic Strand 1: Verification
+
+Checks if data is real, clean, expected, and allowed.
+
+Logic Strand 2: Recovery
+
+Knows how to roll back, rebuild, isolate, and restore.
+
+Logic Strand 3: Law
+
+Holds the system rules:
+
+- verify 3 times
+- isolate bad data
+- quarantine unknowns
+- protect the Spine
+- log everything
+- repair before trust
+
+### 4. Skull Mesh
+
+The Skull Mesh is the outer intelligent protection shell.
+
+It contains:
+
+- silence bricks
+- verification bricks
+- chain-link logic
+- anomaly filters
+- impact dampening
+- trust gates
+
+Its job is to prevent noise, corruption, bad instructions, or broken files from reaching the brain layer.
+
+### 5. Chain-Link Mesh Gate
+
+This is the clip-before-trust layer.
+
+Any new file, module, update, client data, command, or system change must pass through the mesh.
+
+It checks:
+
+- file hash
+- source
+- timestamp
+- behavior
+- dependencies
+- permissions
+- previous known-good state
+- signature/proof record
+
+If it fails, it goes into a brick.
+
+### 6. Cubic Brick Isolation
+
+Bad or unknown data gets locked into a cubic brick.
+
+Inside the brick:
+
+- it cannot touch active memory
+- it cannot touch the Spine
+- it cannot modify runtime
+- it is studied safely
+- logs are captured
+- cause is identified
+
+Then SB712 chooses:
+
+- repair
+- purge
+- archive
+- rollback
+- manual review
+
+### 7. Hunter Nodes
+
+Hunters do not wait for failure.
+
+They patrol:
+
+- files
+- logs
+- manifests
+- RAM behavior
+- startup folders
+- suspicious changes
+- dependency drift
+- checksum mismatches
+
+Their doctrine:
+
+We do not wait for corruption. We hunt it.
+
+Hunters report to Verification, Master Phoenix, and the ledger.
+
+### 8. Truth Nodes
+
+Truth Nodes decide whether something matches known reality.
+
+They compare:
+
+- expected hash vs actual hash
+- old manifest vs current manifest
+- clean checkpoint vs live state
+- declared action vs real behavior
+
+Truth Nodes are the “is this actually true?” layer.
+
+### 9. Verification Nodes
+
+Verification Nodes run the triple-check rule.
+
+Before trust:
+
+1. structural verification
+2. behavioral verification
+3. proof-ledger verification
+
+Only after all 3 pass can data become active.
+
+### 10. Cleaner Nodes
+
+Cleaner Nodes remove junk, broken residue, bad temp files, corrupted fragments, and suspicious debris.
+
+They clean:
+
+- logs after proof capture
+- failed update leftovers
+- temp folders
+- incomplete installs
+- quarantine residue
+- damaged cache layers
+
+But they do not erase evidence before the ledger records it.
+
+### 11. Repair Nodes
+
+Repair Nodes rebuild damaged structure.
+
+They use:
+
+- clean manifests
+- ghost snapshots
+- Phoenix checkpoints
+- previous healthy file copies
+- dependency maps
+- proof reports
+
+They follow behind Warrior Nodes after a hit.
+
+### 12. Warrior Nodes
+
+Warrior Nodes are rapid-response defenders.
+
+They activate when:
+
+- corruption spreads
+- a file tries to modify protected areas
+- runtime behavior becomes hostile
+- heartbeat drops
+- Hunters flag active danger
+
+They isolate, block, freeze, and hold the line while Repair Nodes fix the damage.
+
+### 13. Cooling Nodes
+
+Cooling Nodes reduce system stress.
+
+On an 8GB RAM machine, this matters a lot.
+
+They manage:
+
+- CPU spikes
+- RAM pressure
+- background load
+- runaway processes
+- excessive scans
+- update timing
+
+They keep SB712 lean instead of turning it into a furnace goblin.
+
+### 14. Silence Nodes
+
+Silence Nodes block noise.
+
+They reduce:
+
+- false positives
+- repeated alerts
+- unstable chatter
+- broken signal loops
+- unnecessary scans
+- outside interference
+
+They help the system stay calm enough to think clearly.
+
+### 15. RAM Guard
+
+RAM Guard protects the machine from overload.
+
+It watches:
+
+- memory usage
+- process spikes
+- scan frequency
+- cache growth
+- stuck loops
+
+When RAM gets tight, it:
+
+- pauses noncritical scans
+- moves work to cold storage
+- loads only verified pockets
+- prioritizes recovery functions
+- keeps the core alive
+
+This is why SB712 can be designed for 8GB RAM survival.
+
+### 16. Memory Pockets
+
+Memory Pockets are verified storage capsules inside the braid.
+
+They hold:
+
+- incident lessons
+- known-good patterns
+- clean manifests
+- system behavior history
+- trusted module maps
+- repair recipes
+
+They keep memory out of active RAM until needed.
+
+### 17. Ghost Snapshots
+
+Ghost Snapshots are lightweight recovery images.
+
+They capture:
+
+- file state
+- manifest state
+- config state
+- runtime health
+- important logs
+
+They are not full heavy backups.
+They are fast, lean, and useful for rollback.
+
+### 18. Phoenix Resurrection Nodes
+
+SB712 Phoenix is now a three-node triangle system on each side of the architecture.
+
+Each Phoenix node:
+
+- holds the full system map
+- wakes separately for updates
+- rotates dormant/offline
+- avoids all being exposed at once
+
+Normal cycle:
+
+- Node 1 wakes and updates
+- goes dormant
+- Node 2 wakes and updates
+- goes dormant
+- Node 3 wakes and updates
+- goes dormant
+
+Emergency cycle:
+
+- at 99.8 heartbeat, first Phoenix wakes
+- scans last 6 hours of missing/damaged data
+- at 99.9, the other two wake as backup
+- all three compare and rebuild
+- target restore: under a millisecond conceptually in simulation/design language
+
+### 19. Heartbeat System
+
+Heartbeat measures system integrity.
+
+Example:
+
+- 100% clean
+- 99.9% Phoenix alert threshold
+- 99.8% self-heal trigger
+- below threshold means active recovery begins
+
+Heartbeat watches:
+
+- file health
+- ledger consistency
+- manifest match
+- runtime stability
+- node response
+- backup readiness
+
+### 20. Certification Node
+
+After repair, Certification seals the state.
+
+It confirms:
+
+- repair completed
+- no corruption remains
+- logs were saved
+- system returned to verified condition
+- Spine was not touched by untrusted data
+
+Then it sends status backward and forward through the convoy.
+
+### 21. Return Check Loop
+
+After Certification, SB712 does not just celebrate and wander off.
+
+It rechecks.
+
+The result is sent to:
+
+- Truth Nodes
+- Verification Nodes
+- Repair Nodes
+- Warrior Nodes
+- Hunter Nodes
+- Master Phoenix
+
+Hunters rescan.
+Verification reproves.
+Phoenix confirms closure.
+
+If the problem remains, the convoy reopens.
+
+### 22. Incident Learning / Immunity Layer
+
+Every attack, failure, bug, and corruption event becomes a lesson.
+
+SB712 records:
+
+- what happened
+- where it came from
+- how it entered
+- what it damaged
+- how it was fixed
+- how to prevent it next time
+
+Then it updates the memory pockets and Hunter rules.
+
+This is the immune system.
+
+### 23. Clip Brick
+
+The Clip Brick sits near the brain stem.
+
+It is the approval socket.
+
+Nothing becomes law until it is clipped in and verified.
+
+It handles:
+
+- new modules
+- new business rules
+- updates
+- patches
+- outside integrations
+- AI behavior rules
+
+Clip Brick asks:
+
+Is this clean?
+Is this verified?
+Is this allowed?
+Does this belong in the system?
+
+Only then does it connect.
+
+### 24. Ledger / Proof Reports
+
+Every important action gets recorded.
+
+Proof Reports include:
+
+- timestamp
+- node involved
+- action taken
+- before state
+- after state
+- verification result
+- repair result
+- final certification
+
+This is how SB712 proves what happened.
+
+### Full SB712 Flow
+
+```text
+Incoming Data / Change / Threat
+        ↓
+Chain-Link Mesh Gate
+        ↓
+Truth Node Check
+        ↓
+Triple Verification
+        ↓
+Clean? ───── yes ─────→ Clip Brick → Active System
+  ↓ no
+Cubic Brick Isolation
+        ↓
+Hunter Study
+        ↓
+Warrior Hold
+        ↓
+Repair Node Fix
+        ↓
+Cleaner Node Cleanup
+        ↓
+Certification Node
+        ↓
+Return Check Loop
+        ↓
+Memory Pocket Learning
+        ↓
+Phoenix / Spine Update
+```
+
+### Clean One-Line Definition
+
+SB712 is a braided, mesh-protected, node-driven, self-healing integrity system where every file, command, update, and recovery state must be isolated, verified, repaired, certified, and learned from before it can touch the trusted Spine.
