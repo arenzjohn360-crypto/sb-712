@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "codename": "IronBraid Radiant Core",
+  "core_doctrine": "verification-before-trust",
+  "laws": [
+    "Nothing enters the Spine without triple-certification.",
+    "Unverified data is quarantined, never active.",
+    "Every state transition is ledger-recorded.",
+    "Corrupted nodes are isolated before repair begins.",
+    "Phoenix recovery nodes do not trust the newest checkpoint by default.",
+    "No modulator signal reaches a node without receptor permission.",
+    "Proof reports are mandatory; no proof means no certified state.",
+    "Irreversible or high-risk actions require owner confirmation."
+  ],
+  "state_lifecycle": [
+    "UNVERIFIED",
+    "VERIFIED",
+    "VALIDATED",
+    "CERTIFIED",
+    "ACTIVE",
+    "QUARANTINED",
+    "FAILED"
+  ],
+  "trust_model": {
+    "default_trust": "untrusted",
+    "promotion_requires": ["hash_check", "validation_pass", "certification_mark"],
+    "quarantine_on": ["hash_mismatch", "schema_violation", "unknown_origin", "repeated_failure"]
+  },
+  "spine_assets": [
+    "spine_law.json",
+    "root_manifest.json",
+    "node_registry.json",
+    "ledger_head.json",
+    "radiation_profile.json"
+  ],
+  "created_at": "2026-06-24T00:00:00Z"
+}

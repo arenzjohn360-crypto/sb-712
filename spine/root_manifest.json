@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "ROOT-MANIFEST-001",
+  "state": "CERTIFIED",
+  "description": "Certified file map for SB-712 IronBraid Radiant Core",
+  "entries": [],
+  "hash_algorithm": "sha256",
+  "last_certified_at": null,
+  "certified_by": null,
+  "ledger_ref": null,
+  "notes": "Populated at runtime by the integrity scan pass."
+}
