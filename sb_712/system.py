@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from hashlib import sha256
 from typing import Any, Dict, List, Optional
@@ -79,7 +79,7 @@ class QuarantineRecord:
     object_id: str
     reason: str
     state: QuarantineState = QuarantineState.ISOLATED
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     history: List[str] = field(default_factory=list)
 
     _ALLOWED_TRANSITIONS = {
@@ -114,8 +114,7 @@ class LedgerEntry:
     repair_result: str
     certification_result: str
     metadata: Dict[str, Any] = field(default_factory=dict)
-    timestamp: datetime = field(default_factory=datetime.utcnow)
-    previous_hash: str = ""
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     entry_hash: str = ""
 
 
@@ -183,7 +182,7 @@ class SystemHealth:
     node_readiness: float
     recovery_readiness: float
     trust_ratio: float
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class HeartbeatMonitor:

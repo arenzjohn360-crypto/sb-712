@@ -27,7 +27,7 @@ src/sb688/
 
 ---
 
-## Test Suite — 155 tests, 0 failures
+## Test Suite — 266 tests, 0 failures, 0 warnings
 
 ### Core integrity dimensions
 | Module | Tests |

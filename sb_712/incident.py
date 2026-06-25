@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import List, Optional
 import uuid
@@ -106,7 +106,7 @@ class IncidentStudyRecord:
 
     # Auto-generated
     incident_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    date: datetime = field(default_factory=datetime.utcnow)
+    date: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     # Recovery decision flags
     damage_is_local: bool = True
