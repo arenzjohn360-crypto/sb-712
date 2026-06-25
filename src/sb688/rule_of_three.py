@@ -64,13 +64,16 @@ class TrustGate:
         )
 
     def certify(self, source: str, result: bool, note: str = "") -> TrustStage:
-        self._advance(
+        certified_stage = self._advance(
             expected_current=TrustStage.RE_VERIFIED,
             next_stage=TrustStage.CERTIFIED,
             source=source,
             result=result,
             note=note,
         )
+
+        if certified_stage != TrustStage.CERTIFIED:
+            return self.stage
 
         self.stage = TrustStage.TRUSTED
         self.evidence.append(
