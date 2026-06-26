@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
 import uuid
@@ -18,7 +18,7 @@ class Checkpoint:
     certified: bool
     snapshot: Dict[str, Any] = field(default_factory=dict)
     checkpoint_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     notes: str = ""
 
 
@@ -27,7 +27,7 @@ class RollbackResult:
     success: bool
     checkpoint_id: Optional[str]
     project_id: str
-    rolled_back_at: datetime = field(default_factory=datetime.utcnow)
+    rolled_back_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     reason: str = ""
     message: str = ""
 
