@@ -825,3 +825,10 @@ The `sb_712.system` module now provides executable building blocks for the unifi
 - `QuarantineRecord` / `QuarantineState` for explicit isolation flow.
 - `ProofLedger` for tamper-evident append-only proof events.
 - `HeartbeatMonitor` / `SystemHealth` for integrity-level monitoring.
+
+The `sb_712.security` module extends that slice with upgrade-ready security and deployment artifacts:
+
+- `JWTAuthManager` + `SecurityPolicy` for OAuth2/JWT validation, CORS, rate limiting, RBAC, and CSP policy generation.
+- `EncryptedAuditTrail` + `TrustedOperationGateway` for AES-256-GCM audit logging, Merkle-backed trust proofs, and proof-ledger attestation.
+- `SupabaseSecurityBlueprint` for encrypted audit/trust tables, RLS policies, realtime publication, version tracking, and rollback SQL.
+- `VSCodeWorkspaceBlueprint`, `.vscode/`, `.env.example`, and `scripts/install-sb712-service.ps1` for local debugging and Windows service deployment.
