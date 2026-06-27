@@ -41,6 +41,22 @@ from .system import (
     HeartbeatMonitor,
     TrustGatePipeline,
 )
+from .security import (
+    EncryptedAuditRecord,
+    EncryptedAuditTrail,
+    JWTAuthManager,
+    RateLimiter,
+    SecurityPolicy,
+    SupabaseSecurityBlueprint,
+    TokenClaims,
+    TokenValidationError,
+    TrustedOperationGateway,
+    TrustedOperationResult,
+    VSCodeWorkspaceBlueprint,
+    WindowsServiceInstallerBlueprint,
+    build_runtime_manifest,
+    render_env_template,
+)
 
 __all__ = [
     "IncidentStudyRecord",
@@ -84,4 +100,18 @@ __all__ = [
     "SystemHealth",
     "HeartbeatMonitor",
     "TrustGatePipeline",
+    "TokenValidationError",
+    "TokenClaims",
+    "JWTAuthManager",
+    "SecurityPolicy",
+    "RateLimiter",
+    "EncryptedAuditRecord",
+    "EncryptedAuditTrail",
+    "TrustedOperationResult",
+    "TrustedOperationGateway",
+    "SupabaseSecurityBlueprint",
+    "VSCodeWorkspaceBlueprint",
+    "WindowsServiceInstallerBlueprint",
+    "render_env_template",
+    "build_runtime_manifest",
 ]
