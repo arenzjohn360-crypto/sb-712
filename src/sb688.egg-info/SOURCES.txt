@@ -34,6 +34,7 @@ tests/test_industry_media.py
 tests/test_industry_military.py
 tests/test_industry_telecom.py
 tests/test_learning_node.py
+tests/test_phoenix_benchmarks.py
 tests/test_prevention.py
 tests/test_recovery.py
 tests/test_report.py
