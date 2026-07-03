@@ -199,9 +199,8 @@ def test_rollback_used_directly_for_trigger():
 
 def test_recover_rejects_unsupported_schema_version():
     orch = RecoveryOrchestrator(make_registry())
-    incident = make_incident(schema_version=99)
     with pytest.raises(ValueError):
-        orch.recover(incident)
+        orch.recover(make_incident(schema_version=99))
 
 
 # ---------------------------------------------------------------------------
