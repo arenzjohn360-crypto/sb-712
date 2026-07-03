@@ -32,6 +32,9 @@ def test_record_defaults():
     assert r.what_it_touched == []
     assert r.hunter_rescan_outcome is None
     assert r.incident_id  # auto-generated UUID
+    assert r.lineage_id
+    assert r.schema_version >= 1
+    assert r.integrity_proof
     assert isinstance(r.date, datetime)
 
 
@@ -39,6 +42,7 @@ def test_record_has_unique_ids():
     r1 = make_record()
     r2 = make_record()
     assert r1.incident_id != r2.incident_id
+    assert r1.lineage_id != r2.lineage_id
 
 
 # ---------------------------------------------------------------------------

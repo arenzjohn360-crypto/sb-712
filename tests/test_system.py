@@ -9,6 +9,7 @@ from sb_712.system import (
     SystemConfig,
     TrustGatePipeline,
     TrustStatus,
+    ConsistencyMonitor,
 )
 
 
@@ -45,9 +46,9 @@ def test_trust_gate_verification_failure_is_quarantined():
     result = pipeline.process(
         object_id="OBJ-2",
         source="trusted_feed",
-        structural_ok=False,
-        behavioral_ok=True,
-        proof_ledger_ok=True,
+        structural_score=0.2,
+        behavioral_score=1.0,
+        proof_ledger_score=1.0,
         clip_policy_ok=True,
     )
     assert result.status == TrustStatus.QUARANTINED
@@ -89,9 +90,9 @@ def test_quarantine_transition_rules_enforced():
     result = pipeline.process(
         object_id="OBJ-5",
         source="trusted_feed",
-        structural_ok=False,
-        behavioral_ok=True,
-        proof_ledger_ok=True,
+        structural_score=0.2,
+        behavioral_score=1.0,
+        proof_ledger_score=1.0,
         clip_policy_ok=True,
     )
     q = result.quarantine_record
@@ -136,3 +137,43 @@ def test_proof_ledger_links_previous_hash_chain():
     assert len(entries) == 2
     assert entries[0].previous_hash == "GENESIS"
     assert entries[1].previous_hash == entries[0].entry_hash
+
+
+def test_trust_gate_hard_fail_reason_blocks_even_high_scores():
+    pipeline = TrustGatePipeline()
+    result = pipeline.process(
+        object_id="OBJ-9",
+        source="trusted_feed",
+        structural_score=1.0,
+        behavioral_score=1.0,
+        proof_ledger_score=1.0,
+        hard_fail_reasons=["tamper_detected"],
+        clip_policy_ok=True,
+    )
+    assert result.status == TrustStatus.QUARANTINED
+
+
+def test_trust_gate_schema_gate_rejects_unsupported_version():
+    pipeline = TrustGatePipeline()
+    with pytest.raises(ValueError):
+        pipeline.process(
+            object_id="OBJ-10",
+            source="trusted_feed",
+            structural_score=1.0,
+            behavioral_score=1.0,
+            proof_ledger_score=1.0,
+            clip_policy_ok=True,
+            schema_version=99,
+        )
+
+
+def test_consistency_monitor_raises_drift_alarms():
+    monitor = ConsistencyMonitor(trust_ratio_floor=0.98, quarantine_growth_limit=1, rollback_limit=0, reopen_loop_limit=0)
+    snapshot = monitor.observe(
+        trust_ratio=0.9,
+        quarantine_count=2,
+        rollback_count=1,
+        reopen_loop_count=1,
+    )
+    assert "TRUST_RATIO_DRIFT" in snapshot.alarms
+    assert snapshot.drift_score > 0

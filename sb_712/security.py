@@ -16,6 +16,8 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 from sb688 import MerkleTree
 
+from .data_contracts import CANONICAL_SCHEMA_VERSION, DataContractValidator, canonical_hash
+from .evidence import EvidenceVault
 from .system import LedgerEntry, ProofLedger
 
 
@@ -213,6 +215,10 @@ class EncryptedAuditRecord:
     ciphertext_b64: str
     previous_hash: str
     entry_hash: str
+    schema_version: int = CANONICAL_SCHEMA_VERSION
+    integrity_proof: str = ""
+    lineage_id: str = field(default_factory=lambda: uuid.uuid4().hex)
+    parent_lineage_id: Optional[str] = None
 
 
 class EncryptedAuditTrail:
@@ -235,10 +241,17 @@ class EncryptedAuditTrail:
         status: str,
         metadata: Optional[Mapping[str, Any]] = None,
         trace_id: Optional[str] = None,
+        schema_version: int = CANONICAL_SCHEMA_VERSION,
+        lineage_id: Optional[str] = None,
+        parent_lineage_id: Optional[str] = None,
     ) -> EncryptedAuditRecord:
+        DataContractValidator.require_supported_schema(schema_version)
+        DataContractValidator.require_non_empty(action, "action")
+        DataContractValidator.require_non_empty(resource, "resource")
         recorded_at = _utcnow().isoformat()
         event_id = uuid.uuid4().hex
         trace_id = trace_id or uuid.uuid4().hex
+        canonical_lineage = lineage_id or uuid.uuid4().hex
         payload = {
             "event_id": event_id,
             "trace_id": trace_id,
@@ -284,6 +297,20 @@ class EncryptedAuditTrail:
             ciphertext_b64=ciphertext_b64,
             previous_hash=previous_hash,
             entry_hash=entry_hash,
+            schema_version=schema_version,
+            integrity_proof=canonical_hash(
+                [
+                    event_id,
+                    trace_id,
+                    action,
+                    resource,
+                    status,
+                    canonical_lineage,
+                    str(schema_version),
+                ]
+            ),
+            lineage_id=canonical_lineage,
+            parent_lineage_id=parent_lineage_id,
         )
         self._records.append(record)
         return record
@@ -359,6 +386,7 @@ class TrustedOperationGateway:
         audit_trail: Optional[EncryptedAuditTrail] = None,
         ledger: Optional[ProofLedger] = None,
         rate_limiter: Optional[RateLimiter] = None,
+        evidence_vault: Optional[EvidenceVault] = None,
     ) -> None:
         self.auth = auth
         self.policy = policy or SecurityPolicy()
@@ -368,6 +396,7 @@ class TrustedOperationGateway:
             max_requests=self.policy.rate_limit_max_requests,
             window_seconds=self.policy.rate_limit_window_seconds,
         )
+        self.evidence_vault = evidence_vault or EvidenceVault()
 
     def authorize_operation(
         self,
@@ -377,7 +406,17 @@ class TrustedOperationGateway:
         resource: str,
         required_role: str,
         metadata: Optional[Mapping[str, Any]] = None,
+        schema_version: int = CANONICAL_SCHEMA_VERSION,
+        lineage_id: Optional[str] = None,
+        parent_lineage_id: Optional[str] = None,
     ) -> TrustedOperationResult:
+        normalized_resource, normalized_action = DataContractValidator.validate_contract(
+            object_id=resource,
+            source=action,
+            schema_version=schema_version,
+            lineage_id=lineage_id,
+        )
+        canonical_lineage = lineage_id or uuid.uuid4().hex
         verification_steps = {
             "jwt": False,
             "cors": False,
@@ -424,8 +463,8 @@ class TrustedOperationGateway:
         )
         record = self.audit_trail.append(
             actor=actor,
-            action=action,
-            resource=resource,
+            action=normalized_action,
+            resource=normalized_resource,
             status="accepted" if core_checks_passed else "rejected",
             trace_id=trace_id,
             metadata={
@@ -437,6 +476,9 @@ class TrustedOperationGateway:
                 },
                 **dict(metadata or {}),
             },
+            schema_version=schema_version,
+            lineage_id=canonical_lineage,
+            parent_lineage_id=parent_lineage_id,
         )
         verification_steps["audit_chain"] = self.audit_trail.verify_integrity()
         verification_steps["merkle"] = self.audit_trail.verify_membership(record)
@@ -445,7 +487,7 @@ class TrustedOperationGateway:
         ledger_entry = self.ledger.append(
             LedgerEntry(
                 event_type="security_gate_decision",
-                object_id=resource,
+                object_id=normalized_resource,
                 before_state="ACTIVE",
                 after_state="VERIFIED" if preliminary_trust else "REJECTED",
                 verification_result="VERIFY_PASSED" if preliminary_trust else "VERIFY_FAILED",
@@ -454,13 +496,28 @@ class TrustedOperationGateway:
                 metadata={
                     "trace_id": trace_id,
                     "actor": actor,
-                    "action": action,
+                    "action": normalized_action,
                     "origin": origin,
                     "required_role": required_role,
                 },
+                schema_version=schema_version,
+                lineage_id=canonical_lineage,
+                parent_lineage_id=parent_lineage_id,
             )
         )
         verification_steps["proof_ledger"] = self.ledger.verify_integrity()
+        self.evidence_vault.append(
+            evidence_id=f"security:{trace_id}",
+            lineage_id=canonical_lineage,
+            category="security_gate",
+            payload={
+                "resource": normalized_resource,
+                "action": normalized_action,
+                "trusted": preliminary_trust and verification_steps["proof_ledger"],
+                "verification_steps": dict(verification_steps),
+                "required_role": required_role,
+            },
+        )
         trusted = preliminary_trust and verification_steps["proof_ledger"]
         reason = "Operation verified and trusted." if trusted else "; ".join(list(dict.fromkeys(reasons)) or ["Verification failed"])
 
@@ -721,5 +778,6 @@ def build_runtime_manifest() -> Dict[str, Any]:
             "schema_version": supabase.schema_version,
             "rollback": f"{supabase.schema_version}_rollback.sql",
             "trust_rule": "No active state becomes trusted state without verification",
+            "schema_migration_gate": "reject unsupported schema versions at ingress",
         },
     }

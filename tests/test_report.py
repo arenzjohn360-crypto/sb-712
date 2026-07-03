@@ -45,6 +45,7 @@ def make_full_incident():
 def test_report_contains_incident_id():
     incident = make_full_incident()
     assert incident.incident_id in generate_report(incident)
+    assert incident.lineage_id in generate_report(incident)
 
 
 def test_report_contains_project_id():

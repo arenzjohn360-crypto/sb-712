@@ -65,6 +65,15 @@ def test_process_flags_hunter_and_verification_updated():
     assert incident.verification_rule_updated is True
 
 
+def test_process_builds_repeat_pattern_features():
+    registry = PreventionRegistry()
+    node = LearningNode(registry)
+    incident = make_incident(location="payments")
+    node.process(incident)
+    assert any(item.startswith("source:") for item in incident.repeat_pattern_features)
+    assert incident.repeat_pattern_score > 0
+
+
 def test_process_sets_checkpoint_created():
     registry = PreventionRegistry()
     node = LearningNode(registry)

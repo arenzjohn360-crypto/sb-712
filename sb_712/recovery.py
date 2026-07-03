@@ -22,9 +22,11 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from typing import List, Optional
+import uuid
 
 from .incident import IncidentStudyRecord, IncidentType, HUNTER_RESCAN_REOPEN_OUTCOMES
 from .checkpoint import CheckpointRegistry, RollbackResult
+from .data_contracts import CANONICAL_SCHEMA_VERSION, DataContractValidator, canonical_hash
 
 # Maximum times the convoy will loop before escalating to rollback.
 MAX_CONVOY_ATTEMPTS = 3
@@ -94,6 +96,10 @@ class ConvoyResult:
     failed_stage: Optional[ConvoyStage] = None
     convoy_attempts: int = 1
     message: str = ""
+    schema_version: int = CANONICAL_SCHEMA_VERSION
+    lineage_id: str = field(default_factory=lambda: uuid.uuid4().hex)
+    parent_lineage_id: Optional[str] = None
+    integrity_proof: str = ""
 
 
 # ---------------------------------------------------------------------------
@@ -115,6 +121,10 @@ class RecoveryResult:
     rollback_result: Optional[RollbackResult] = None
     completed_at: datetime = field(default_factory=datetime.utcnow)
     notes: str = ""
+    schema_version: int = CANONICAL_SCHEMA_VERSION
+    lineage_id: str = field(default_factory=lambda: uuid.uuid4().hex)
+    parent_lineage_id: Optional[str] = None
+    integrity_proof: str = ""
 
 
 # ---------------------------------------------------------------------------
@@ -392,8 +402,15 @@ class ConvoyRecovery:
         self._return_check = _ReturnCheck()
 
     def run(self, incident: IncidentStudyRecord) -> ConvoyResult:
+        DataContractValidator.validate_contract(
+            object_id=incident.incident_id,
+            source=incident.source.value,
+            schema_version=incident.schema_version,
+            lineage_id=incident.lineage_id,
+        )
         attempt = 0
         last_return_check: Optional[ReturnCheckResult] = None
+        convoy_lineage = uuid.uuid4().hex
 
         while attempt < MAX_CONVOY_ATTEMPTS:
             attempt += 1
@@ -407,6 +424,16 @@ class ConvoyRecovery:
                     failed_stage=failed_stage,
                     convoy_attempts=attempt,
                     message=fwd_msg,
+                    lineage_id=convoy_lineage,
+                    parent_lineage_id=incident.lineage_id,
+                    integrity_proof=canonical_hash(
+                        [
+                            incident.incident_id,
+                            "forward_failed",
+                            str(attempt),
+                            convoy_lineage,
+                        ]
+                    ),
                 )
 
             # Return-check loop
@@ -420,6 +447,16 @@ class ConvoyRecovery:
                     return_check=rc,
                     convoy_attempts=attempt,
                     message="Convoy complete. Phoenix closed the incident.",
+                    lineage_id=convoy_lineage,
+                    parent_lineage_id=incident.lineage_id,
+                    integrity_proof=canonical_hash(
+                        [
+                            incident.incident_id,
+                            "closed",
+                            str(attempt),
+                            convoy_lineage,
+                        ]
+                    ),
                 )
 
             # Phoenix said REOPEN — loop again if attempts remain.
@@ -435,6 +472,16 @@ class ConvoyRecovery:
             message=(
                 f"Convoy exhausted {MAX_CONVOY_ATTEMPTS} attempt(s) without closure. "
                 "Escalating to emergency rollback."
+            ),
+            lineage_id=convoy_lineage,
+            parent_lineage_id=incident.lineage_id,
+            integrity_proof=canonical_hash(
+                [
+                    incident.incident_id,
+                    "exhausted",
+                    str(attempt),
+                    convoy_lineage,
+                ]
             ),
         )
 
@@ -467,11 +514,18 @@ class RecoveryOrchestrator:
         return _decide_method(incident)
 
     def recover(self, incident: IncidentStudyRecord) -> RecoveryResult:
+        DataContractValidator.validate_contract(
+            object_id=incident.incident_id,
+            source=incident.source.value,
+            schema_version=incident.schema_version,
+            lineage_id=incident.lineage_id,
+        )
         method = self.decide_method(incident)
+        recovery_lineage = uuid.uuid4().hex
 
         if method == RecoveryMethod.ROLLBACK:
             return self._do_rollback(
-                incident, reason="Pre-flight rollback trigger detected."
+                incident, reason="Pre-flight rollback trigger detected.", lineage_id=recovery_lineage
             )
 
         # Attempt the full convoy (forward + return-check loop).
@@ -485,6 +539,11 @@ class RecoveryOrchestrator:
                 incident_id=incident.incident_id,
                 convoy_result=convoy_result,
                 notes="Convoy recovery succeeded. Incident closed by Master Phoenix.",
+                lineage_id=recovery_lineage,
+                parent_lineage_id=incident.lineage_id,
+                integrity_proof=canonical_hash(
+                    [incident.incident_id, RecoveryMethod.CONVOY.value, recovery_lineage]
+                ),
             )
 
         # Convoy failed — emergency rollback.
@@ -503,11 +562,17 @@ class RecoveryOrchestrator:
                 "Convoy failed. Emergency rollback to last healthy certified checkpoint. "
                 "The extinguisher is off the wall."
             ),
+            lineage_id=recovery_lineage,
+            parent_lineage_id=incident.lineage_id,
+            integrity_proof=canonical_hash(
+                [incident.incident_id, RecoveryMethod.ROLLBACK.value, recovery_lineage]
+            ),
         )
 
     def _do_rollback(
-        self, incident: IncidentStudyRecord, reason: str
+        self, incident: IncidentStudyRecord, reason: str, lineage_id: Optional[str] = None
     ) -> RecoveryResult:
+        recovery_lineage = lineage_id or uuid.uuid4().hex
         rollback_result = self.checkpoint_registry.rollback(
             incident.project_id, reason=reason
         )
@@ -518,4 +583,9 @@ class RecoveryOrchestrator:
             incident_id=incident.incident_id,
             rollback_result=rollback_result,
             notes=reason,
+            lineage_id=recovery_lineage,
+            parent_lineage_id=incident.lineage_id,
+            integrity_proof=canonical_hash(
+                [incident.incident_id, RecoveryMethod.ROLLBACK.value, recovery_lineage]
+            ),
         )

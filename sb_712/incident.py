@@ -4,6 +4,8 @@ from enum import Enum
 from typing import List, Optional
 import uuid
 
+from .data_contracts import CANONICAL_SCHEMA_VERSION, DataContractValidator, canonical_hash
+
 
 class IncidentType(Enum):
     FILE_CORRUPTION = "FILE_CORRUPTION"
@@ -107,6 +109,10 @@ class IncidentStudyRecord:
     # Auto-generated
     incident_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     date: datetime = field(default_factory=datetime.utcnow)
+    schema_version: int = CANONICAL_SCHEMA_VERSION
+    integrity_proof: str = ""
+    lineage_id: str = field(default_factory=lambda: uuid.uuid4().hex)
+    parent_lineage_id: Optional[str] = None
 
     # Recovery decision flags
     damage_is_local: bool = True
@@ -122,3 +128,26 @@ class IncidentStudyRecord:
     # Valid values: "problem_gone", "problem_still_active",
     #               "new_damage_found", "false_alarm", "repeat_attack", or None.
     hunter_rescan_outcome: Optional[str] = None
+    repeat_pattern_score: float = 0.0
+    repeat_pattern_features: List[str] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        DataContractValidator.validate_contract(
+            object_id=self.incident_id,
+            source=self.source.value,
+            schema_version=self.schema_version,
+            lineage_id=self.lineage_id,
+        )
+        if not self.integrity_proof:
+            self.integrity_proof = canonical_hash(
+                [
+                    self.incident_id,
+                    self.project_id,
+                    self.incident_type.value,
+                    self.source.value,
+                    self.severity.value,
+                    self.date.isoformat(),
+                    self.lineage_id,
+                    str(self.schema_version),
+                ]
+            )

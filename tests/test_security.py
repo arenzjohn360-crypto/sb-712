@@ -99,6 +99,8 @@ def test_encrypted_audit_trail_is_tamper_evident_and_merkle_verified():
     assert trail.verify_membership(second) is True
     assert trail.decrypt(second)["metadata"]["role"] == "admin"
     assert len(trail.merkle_root()) == 64
+    assert first.lineage_id
+    assert second.integrity_proof
 
     tampered = trail.records()[0]
     trail._records[0] = tampered.__class__(**{**tampered.__dict__, "ciphertext_b64": "tampered"})
@@ -162,3 +164,25 @@ def test_jwt_validation_rejects_expired_token():
 
     with pytest.raises(ValueError):
         auth.validate_token(token)
+
+
+def test_trusted_operation_rejects_unsupported_schema_version():
+    auth = JWTAuthManager(secret=b"x" * 32, issuer="sb712", audience="sb712-web")
+    claims = TokenClaims(
+        sub="user-1",
+        role="admin",
+        issuer="sb712",
+        audience="sb712-web",
+        expires_at=_utcnow() + timedelta(minutes=5),
+    )
+    gateway = TrustedOperationGateway(auth=auth, policy=SecurityPolicy())
+    token = auth.issue_token(claims)
+    with pytest.raises(ValueError):
+        gateway.authorize_operation(
+            authorization_header="Bearer " + token,
+            origin="https://app.sb712.local",
+            action="deploy.release",
+            resource="spine",
+            required_role="admin",
+            schema_version=77,
+        )

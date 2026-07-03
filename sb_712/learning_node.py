@@ -1,5 +1,6 @@
 import uuid
-from typing import List
+from collections import defaultdict
+from typing import Dict, List, Tuple
 
 from .incident import IncidentStudyRecord, IncidentType
 from .prevention import PreventionRegistry, PreventionRule
@@ -34,6 +35,7 @@ class LearningNode:
     def __init__(self, prevention_registry: PreventionRegistry) -> None:
         self.prevention_registry = prevention_registry
         self._lesson_reports: List[str] = []
+        self._pattern_counts: Dict[Tuple[str, str, str], int] = defaultdict(int)
 
     def process(self, record: IncidentStudyRecord) -> str:
         """
@@ -42,6 +44,7 @@ class LearningNode:
         """
         self._derive_root_cause(record)
         self._assess_repeat_risk(record)
+        self._derive_repeat_pattern_features(record)
         self._create_prevention_rule(record)
         self._update_hunter_patterns(record)
         self._update_verification_rules(record)
@@ -63,6 +66,22 @@ class LearningNode:
 
     def _assess_repeat_risk(self, record: IncidentStudyRecord) -> None:
         record.repeat_risk = record.incident_type in _HIGH_REPEAT_RISK_TYPES
+
+    def _derive_repeat_pattern_features(self, record: IncidentStudyRecord) -> None:
+        location = (record.location or "unknown").strip().lower()
+        key = (record.source.value, record.incident_type.value, location)
+        self._pattern_counts[key] += 1
+        occurrences = self._pattern_counts[key]
+        record.repeat_pattern_features = [
+            f"source:{record.source.value}",
+            f"type:{record.incident_type.value}",
+            f"location:{location}",
+            f"occurrences:{occurrences}",
+            f"repair:{'present' if bool(record.repair_action) else 'missing'}",
+        ]
+        record.repeat_pattern_score = min(1.0, occurrences / 5.0)
+        if record.repeat_pattern_score >= 0.6:
+            record.repeat_risk = True
 
     def _create_prevention_rule(self, record: IncidentStudyRecord) -> None:
         # If a prevention rule was already manually set, respect it.

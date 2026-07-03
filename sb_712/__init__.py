@@ -39,8 +39,19 @@ from .system import (
     TrustGateResult,
     SystemHealth,
     HeartbeatMonitor,
+    ConsistencySLOSnapshot,
+    ConsistencyMonitor,
     TrustGatePipeline,
 )
+from .data_contracts import (
+    CANONICAL_SCHEMA_VERSION,
+    SUPPORTED_SCHEMA_VERSIONS,
+    CanonicalMetadata,
+    DataContractIssue,
+    DataContractError,
+    DataContractValidator,
+)
+from .evidence import EvidenceRecord, EvidenceVault
 from .security import (
     EncryptedAuditRecord,
     EncryptedAuditTrail,
@@ -99,7 +110,17 @@ __all__ = [
     "TrustGateResult",
     "SystemHealth",
     "HeartbeatMonitor",
+    "ConsistencySLOSnapshot",
+    "ConsistencyMonitor",
     "TrustGatePipeline",
+    "CANONICAL_SCHEMA_VERSION",
+    "SUPPORTED_SCHEMA_VERSIONS",
+    "CanonicalMetadata",
+    "DataContractIssue",
+    "DataContractError",
+    "DataContractValidator",
+    "EvidenceRecord",
+    "EvidenceVault",
     "TokenValidationError",
     "TokenClaims",
     "JWTAuthManager",

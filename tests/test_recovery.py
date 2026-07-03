@@ -78,6 +78,8 @@ def test_convoy_recovery_success():
     result = orch.recover(make_incident())
     assert result.success is True
     assert result.method_used == RecoveryMethod.CONVOY
+    assert result.parent_lineage_id is not None
+    assert result.lineage_id != result.parent_lineage_id
 
 
 def test_convoy_result_has_forward_and_return_check():
@@ -88,6 +90,7 @@ def test_convoy_result_has_forward_and_return_check():
     rc = result.convoy_result.return_check
     assert rc is not None
     assert len(rc.stages) == len(ReturnCheckStage)
+    assert result.convoy_result.parent_lineage_id is not None
 
 
 def test_convoy_return_check_phoenix_closed():
@@ -192,6 +195,13 @@ def test_rollback_used_directly_for_trigger():
     assert result.method_used == RecoveryMethod.ROLLBACK
     assert result.convoy_result is None  # no convoy was attempted
     assert result.rollback_result is not None
+
+
+def test_recover_rejects_unsupported_schema_version():
+    orch = RecoveryOrchestrator(make_registry())
+    incident = make_incident(schema_version=99)
+    with pytest.raises(ValueError):
+        orch.recover(incident)
 
 
 # ---------------------------------------------------------------------------

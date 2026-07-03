@@ -26,6 +26,17 @@ def test_get_last_healthy_certified_returns_most_recent():
     assert registry.get_last_healthy_certified("PRJ-001") is new
 
 
+def test_get_last_healthy_certified_prefers_best_quality_over_newer():
+    registry = CheckpointRegistry()
+    best = make_checkpoint(confidence_score=1.0, verification_depth=10)
+    best.created_at = datetime(2024, 1, 1)
+    newer = make_checkpoint(confidence_score=0.2, verification_depth=1)
+    newer.created_at = datetime(2024, 6, 1)
+    registry.add_checkpoint(best)
+    registry.add_checkpoint(newer)
+    assert registry.get_last_healthy_certified("PRJ-001") is best
+
+
 def test_get_last_healthy_certified_none_when_empty():
     registry = CheckpointRegistry()
     assert registry.get_last_healthy_certified("NO-PROJECT") is None
@@ -81,6 +92,7 @@ def test_rollback_records_reason():
     registry.add_checkpoint(make_checkpoint())
     result = registry.rollback("PRJ-001", reason="spine threatened")
     assert result.reason == "spine threatened"
+    assert result.selected_quality_score > 0
 
 
 # ---------------------------------------------------------------------------
