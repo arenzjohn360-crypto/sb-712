@@ -95,6 +95,19 @@ pytest tests/ -q
 
 ---
 
+## Reference Deployment Baseline
+
+This design has been validated on a practical low-resource host:
+
+- HP ProBook
+- Windows 10
+- 8GB RAM
+- 250GB SSD
+
+The runtime model and recovery layers are kept lean to remain operational on this class of machine.
+
+---
+
 ## Success criteria
 
 | Property | Target |
@@ -746,6 +759,8 @@ System-wide coordinate system providing known-good references, location awarenes
 ### Layer 24: Qubex Pairing
 
 Every critical node has an independent pair (Node 1 and Node 2), and their results are compared before trust.
+
+Knowledge is synchronized in verified pairs first, then promoted to wider system trust.
 
 ### Layer 25: Return Check System
 

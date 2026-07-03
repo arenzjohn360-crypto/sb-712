@@ -44,6 +44,7 @@ Every three hours:
 - Synchronizes knowledge
 - Scans recent changes
 - Updates checkpoint metadata
+- Performs pairwise knowledge reconciliation before broader sync
 - Shares verified knowledge with all Phoenix nodes
 - Returns to dormancy
 - The next node rotates in
@@ -63,3 +64,12 @@ At 99.9 heartbeat:
 
 - All Phoenix nodes wake
 - Emergency synchronized recovery begins
+
+## Reference Deployment Baseline
+
+Current field deployment baseline for this design:
+
+- HP ProBook
+- Windows 10
+- 8GB RAM
+- 250GB SSD

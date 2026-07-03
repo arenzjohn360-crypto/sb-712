@@ -96,6 +96,7 @@ It uses:
 - Parallel verification
 - Redundant recovery paths
 - Shared Phoenix knowledge
+- Pairwise knowledge sharing before trust promotion
 - Probability scoring
 - Uncertainty tracking
 - Certification before state collapse
