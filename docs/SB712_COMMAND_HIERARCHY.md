@@ -38,11 +38,11 @@ There are four Phoenix-side command nodes:
 
 Phoenix nodes are pre-programmed with the full system architecture.
 
-Every three hours:
+Every six hours:
 
 - One Phoenix node wakes
 - Synchronizes knowledge
-- Scans recent changes
+- Scans recent data changes
 - Updates checkpoint metadata
 - Performs pairwise knowledge reconciliation before broader sync
 - Shares verified knowledge with all Phoenix nodes
@@ -55,15 +55,15 @@ If one Phoenix learns verified truth, all Phoenix nodes learn it.
 
 At 99.8 heartbeat:
 
-- Two Phoenix nodes wake
-- One scans and verifies
-- One prepares recovery build/shadow restore
-- Reserve watches and prepares certification
+- One Phoenix node wakes first
+- Performs rapid scan/verify on the latest integrity window
+- Prepares pre-emergency rebuild plan before blackout risk
 
 At 99.9 heartbeat:
 
-- All Phoenix nodes wake
-- Emergency synchronized recovery begins
+- The other two Phoenix nodes wake in emergency support mode
+- All three synchronize, compare, and rebuild to 100% healthy state
+- Recovery target remains no data loss with sub-millisecond design intent
 
 ## Reference Deployment Baseline
 

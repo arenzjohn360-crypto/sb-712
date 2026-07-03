@@ -435,6 +435,7 @@ Each Phoenix node:
 
 Normal cycle:
 
+- every 6 hours, one Phoenix wakes to scan and synchronize
 - Node 1 wakes and updates
 - goes dormant
 - Node 2 wakes and updates
@@ -446,9 +447,10 @@ Emergency cycle:
 
 - at 99.8 heartbeat, first Phoenix wakes
 - scans last 6 hours of missing/damaged data
-- at 99.9, the other two wake as backup
-- all three compare and rebuild
-- target restore: under a millisecond conceptually in simulation/design language
+- preps emergency rebuild path before blackout risk
+- at 99.9, the other two wake as emergency support
+- all three compare and rebuild to 100% healthy/clean state
+- target restore: no data loss and under a millisecond conceptually in simulation/design language
 
 ### 19. Heartbeat System
 
