@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "NODE-REGISTRY-001",
+  "nodes": [
+    {
+      "node_id": "spine-core",
+      "role": "spine",
+      "state": "ACTIVE",
+      "trust": "trusted",
+      "routes": ["ledger", "intelligence", "recovery"],
+      "permissions": ["read", "write", "certify"]
+    },
+    {
+      "node_id": "ledger-primary",
+      "role": "ledger",
+      "state": "ACTIVE",
+      "trust": "trusted",
+      "routes": ["ledger-mirror-a", "ledger-mirror-b"],
+      "permissions": ["append", "verify"]
+    },
+    {
+      "node_id": "phoenix-a",
+      "role": "recovery",
+      "state": "DORMANT",
+      "trust": "trusted",
+      "routes": ["phoenix-b", "phoenix-c", "spine-core"],
+      "permissions": ["read", "restore"]
+    },
+    {
+      "node_id": "phoenix-b",
+      "role": "recovery",
+      "state": "DORMANT",
+      "trust": "trusted",
+      "routes": ["phoenix-a", "phoenix-c", "spine-core"],
+      "permissions": ["read", "restore"]
+    },
+    {
+      "node_id": "phoenix-c",
+      "role": "recovery",
+      "state": "DORMANT",
+      "trust": "trusted",
+      "routes": ["phoenix-a", "phoenix-b", "spine-core"],
+      "permissions": ["read", "restore"]
+    },
+    {
+      "node_id": "vera-gate",
+      "role": "arbitration",
+      "state": "ACTIVE",
+      "trust": "trusted",
+      "routes": ["spine-core", "ledger-primary"],
+      "permissions": ["approve", "deny", "log"]
+    },
+    {
+      "node_id": "ava-coordinator",
+      "role": "coordination",
+      "state": "ACTIVE",
+      "trust": "trusted",
+      "routes": ["vera-gate", "intelligence", "recovery"],
+      "permissions": ["coordinate", "escalate"]
+    }
+  ],
+  "last_updated": null
+}
