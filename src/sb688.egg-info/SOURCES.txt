@@ -15,6 +15,16 @@ src/sb688.egg-info/SOURCES.txt
 src/sb688.egg-info/dependency_links.txt
 src/sb688.egg-info/requires.txt
 src/sb688.egg-info/top_level.txt
+src/stitch_brick/__init__.py
+src/stitch_brick/braid.py
+src/stitch_brick/brick.py
+src/stitch_brick/disk_io.py
+src/stitch_brick/fault_injector.py
+src/stitch_brick/metrics.py
+src/stitch_brick/proof_generator.py
+src/stitch_brick/spine.py
+src/stitch_brick/strand.py
+src/stitch_brick/validator.py
 tests/test_chaos.py
 tests/test_checkpoint.py
 tests/test_concurrency.py
@@ -41,4 +51,5 @@ tests/test_rule_of_three.py
 tests/test_security.py
 tests/test_self_healing.py
 tests/test_space_environments.py
+tests/test_stitch_brick.py
 tests/test_system.py
