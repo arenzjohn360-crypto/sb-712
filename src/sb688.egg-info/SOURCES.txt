@@ -30,6 +30,7 @@ tests/test_checkpoint.py
 tests/test_concurrency.py
 tests/test_consistency.py
 tests/test_correctness.py
+tests/test_corruption_guard.py
 tests/test_durability.py
 tests/test_immunity_node.py
 tests/test_incident.py
@@ -44,10 +45,12 @@ tests/test_industry_media.py
 tests/test_industry_military.py
 tests/test_industry_telecom.py
 tests/test_learning_node.py
+tests/test_lesson_store.py
 tests/test_prevention.py
 tests/test_recovery.py
 tests/test_report.py
 tests/test_rule_of_three.py
+tests/test_sb689.py
 tests/test_security.py
 tests/test_self_healing.py
 tests/test_space_environments.py
