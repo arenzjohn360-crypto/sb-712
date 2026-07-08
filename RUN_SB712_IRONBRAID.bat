@@ -2,7 +2,7 @@
 :: RUN_SB712_IRONBRAID.bat
 :: Windows launcher for SB-712 IronBraid Radiant Core
 ::
-:: Prerequisites: Python 3.9+ installed and on PATH
+:: Prerequisites: Python 3.10+ installed and on PATH
 ::
 :: Usage: double-click or run from a command prompt in the repo root.
 
@@ -17,7 +17,7 @@ echo.
 where python >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python not found on PATH.
-    echo Please install Python 3.9+ from https://python.org and retry.
+    echo Please install Python 3.10+ from https://python.org and retry.
     pause
     exit /b 1
 )
@@ -27,7 +27,16 @@ echo Python version:
 python --version
 echo.
 
+:: Install / update dependencies.
+echo Installing dependencies...
+python -m pip install -e "%~dp0.[dev]" --quiet
+if errorlevel 1 (
+    echo WARNING: pip install returned an error. Attempting to continue...
+)
+echo.
+
 :: Run the entrypoint.
+echo Running SB-712 IronBraid integrity scan...
 python "%~dp0run_sb712_ironbraid.py"
 if errorlevel 1 (
     echo.
