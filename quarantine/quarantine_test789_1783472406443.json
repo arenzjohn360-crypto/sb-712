@@ -1,0 +1,43 @@
+{
+  "test_id": 789,
+  "seed": 789,
+  "scenario": "80_percent_brick_failure",
+  "fault_type": "mass_failure",
+  "fault_target": "brick-007,brick-000,brick-009,brick-001,brick-003,brick-004,brick-002,brick-005",
+  "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+  "bricks_failed": 0,
+  "detection_failures": [
+    {
+      "brick_id": "brick-000",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-001",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-002",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-003",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-004",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-005",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-007",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-009",
+      "reason": "brick unavailable: state=FAILED"
+    }
+  ]
+}
