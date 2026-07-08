@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-07-08T10:34:18+00:00",
+  "scenario": "byte_corruption",
+  "total_runs": 3,
+  "intact_count": 3,
+  "broken_count": 0,
+  "ledger_seal_mismatches": 0,
+  "finding": "Under the tested simulation conditions, observed zero undetected ledger drift across 3 runs.",
+  "intact_runs": [
+    {
+      "test_id": 0,
+      "seed": 0,
+      "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+      "seal_after": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc"
+    },
+    {
+      "test_id": 1,
+      "seed": 1,
+      "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+      "seal_after": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc"
+    },
+    {
+      "test_id": 2,
+      "seed": 2,
+      "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+      "seal_after": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc"
+    }
+  ],
+  "broken_runs": []
+}
