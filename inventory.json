@@ -1,0 +1,939 @@
+{
+  "generated": "2026-07-09T14:49:00Z",
+  "total_modules": 48,
+  "packages": {
+    "sb_712": {
+      "description": "SB-712 core \u2014 incident study, immunity, learning, recovery, security, service host",
+      "module_count": 14,
+      "total_lines": 3095
+    },
+    "src/sb688": {
+      "description": "SB-688 storage engine \u2014 WAL, block store, replicas, Merkle, ECC, crypto, clocks",
+      "module_count": 10,
+      "total_lines": 1296
+    },
+    "src/stitch_brick": {
+      "description": "Stitch Brick validation \u2014 braid, brick, strand, validator, proof generator",
+      "module_count": 10,
+      "total_lines": 1865
+    },
+    "intelligence": {
+      "description": "IronBraid Radiant Core \u2014 AVA coordinator, VERA gate, forecast, mask, receptor",
+      "module_count": 7,
+      "total_lines": 599
+    },
+    "recovery": {
+      "description": "Recovery layer \u2014 checkpoint validator, Phoenix triangle, rollback engine, route healer",
+      "module_count": 5,
+      "total_lines": 540
+    },
+    "root": {
+      "description": "Entry-point scripts",
+      "module_count": 2,
+      "total_lines": 478
+    }
+  },
+  "modules": [
+    {
+      "path": "run_sb712_ironbraid.py",
+      "package": "root",
+      "docstring": "run_sb712_ironbraid.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [],
+      "public_functions": [
+        "ensure_structure",
+        "run_integrity_scan",
+        "write_proof_report",
+        "main"
+      ],
+      "lines": 220,
+      "sha256": "13645cfc0e56032b16baf1686a67dbf7d69c177b87cf6ee9dd875e7f2761a9f4"
+    },
+    {
+      "path": "run_validation.py",
+      "package": "root",
+      "docstring": "run_validation.py \u2014 SB-712 Stitch Brick validation CLI.",
+      "classes": [],
+      "public_functions": [
+        "main"
+      ],
+      "lines": 258,
+      "sha256": "548d22fa21afb585f85f6eb5b91b6095da8f2d89d85ea43f9318d248fd80d313"
+    },
+    {
+      "path": "intelligence/__init__.py",
+      "package": "intelligence",
+      "docstring": "",
+      "classes": [],
+      "public_functions": [],
+      "lines": 1,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "intelligence/ava_coordinator.py",
+      "package": "intelligence",
+      "docstring": "ava_coordinator.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "Task",
+        "TaskResult",
+        "AVACoordinator"
+      ],
+      "public_functions": [
+        "register_handler",
+        "submit"
+      ],
+      "lines": 116,
+      "sha256": "f4738946de5224cfb4a39322968edbd233ef2e765d189ccb33d838730afdb56c"
+    },
+    {
+      "path": "intelligence/fieldview_encoder.py",
+      "package": "intelligence",
+      "docstring": "fieldview_encoder.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "FieldSnapshot",
+        "FieldViewEncoder"
+      ],
+      "public_functions": [
+        "hash_file",
+        "hash_string",
+        "capture"
+      ],
+      "lines": 88,
+      "sha256": "2cbe8fb06a346b19cc4ed29c0d9bbcaaa8df8cd55f62938628d23e81207915c8"
+    },
+    {
+      "path": "intelligence/forecast_node.py",
+      "package": "intelligence",
+      "docstring": "forecast_node.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "RiskForecast",
+        "ForecastNode"
+      ],
+      "public_functions": [
+        "predict"
+      ],
+      "lines": 93,
+      "sha256": "72a882965c0bde0151e1bdb729200b5c499589fcf8a6bf19f6bd3a139c84087e"
+    },
+    {
+      "path": "intelligence/mask_evaluator.py",
+      "package": "intelligence",
+      "docstring": "mask_evaluator.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "MaskResult",
+        "MaskEvaluator"
+      ],
+      "public_functions": [
+        "evaluate"
+      ],
+      "lines": 104,
+      "sha256": "d9da880b215de1c769420e9f29629b770ef62e8fd9aae66191b5469762ccfca3"
+    },
+    {
+      "path": "intelligence/receptor_registry.py",
+      "package": "intelligence",
+      "docstring": "receptor_registry.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "Receptor",
+        "ReceptorRegistry"
+      ],
+      "public_functions": [
+        "register",
+        "deregister",
+        "can_receive",
+        "receptors_for",
+        "nodes_for_signal",
+        "audit_log"
+      ],
+      "lines": 71,
+      "sha256": "f188d968f876ddc2dfcae507ceef1632f3c6be224f7e0249068ec71c44676660"
+    },
+    {
+      "path": "intelligence/vera_gate.py",
+      "package": "intelligence",
+      "docstring": "vera_gate.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "CertificationBundle",
+        "VERADecision",
+        "VERAGate"
+      ],
+      "public_functions": [
+        "is_triple_certified",
+        "evaluate",
+        "last_decision"
+      ],
+      "lines": 126,
+      "sha256": "2dc7a5b9fc797d36d6fd48b4d94a84eff6ee2e9ba388b9578458ca7860b90a93"
+    },
+    {
+      "path": "recovery/__init__.py",
+      "package": "recovery",
+      "docstring": "",
+      "classes": [],
+      "public_functions": [],
+      "lines": 1,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "recovery/checkpoint_validator.py",
+      "package": "recovery",
+      "docstring": "checkpoint_validator.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "CheckpointRecord",
+        "ValidationResult",
+        "CheckpointValidator"
+      ],
+      "public_functions": [
+        "validate"
+      ],
+      "lines": 132,
+      "sha256": "d50f581abbe3e2816f2f9ca24a4f42298409530beea57a462e658c766ca6428f"
+    },
+    {
+      "path": "recovery/phoenix_triangle.py",
+      "package": "recovery",
+      "docstring": "phoenix_triangle.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "PhoenixState",
+        "CheckpointCandidate",
+        "PhoenixResult",
+        "PhoenixNode",
+        "PhoenixTriangle"
+      ],
+      "public_functions": [
+        "evaluate_and_restore",
+        "go_dormant",
+        "recover",
+        "majority_verified"
+      ],
+      "lines": 175,
+      "sha256": "bc7fca295a88472bce3196eda85bbe962b2ba05543da9f0b49f381fc78f8d2bd"
+    },
+    {
+      "path": "recovery/rollback_engine.py",
+      "package": "recovery",
+      "docstring": "rollback_engine.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "RollbackRecord",
+        "RollbackEngine"
+      ],
+      "public_functions": [
+        "register_checkpoint",
+        "certified_checkpoints",
+        "rollback",
+        "last_rollback"
+      ],
+      "lines": 103,
+      "sha256": "f2aa6d93b8fe36c91e355da04918b7bc5a2d635ad2a36594710f2f1d3c1e0200"
+    },
+    {
+      "path": "recovery/route_healer.py",
+      "package": "recovery",
+      "docstring": "route_healer.py \u2014 SB-712 IronBraid Radiant Core",
+      "classes": [
+        "RouteMap",
+        "HealResult",
+        "RouteHealer"
+      ],
+      "public_functions": [
+        "add_node",
+        "mark_failed",
+        "mark_recovered",
+        "heal",
+        "failed_nodes"
+      ],
+      "lines": 129,
+      "sha256": "8e961e6de2789b63cc3651cdb026f6a8f13a379f415f5606a1962f437b463ea5"
+    },
+    {
+      "path": "sb_712/__init__.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [],
+      "public_functions": [],
+      "lines": 137,
+      "sha256": "2d3365f75e36f12e34564d013683d2c7373483cdd137b299c7e22c6f64d824f6"
+    },
+    {
+      "path": "sb_712/checkpoint.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "CheckpointStatus",
+        "Checkpoint",
+        "RollbackResult",
+        "CheckpointRegistry"
+      ],
+      "public_functions": [
+        "add_checkpoint",
+        "get_last_healthy_certified",
+        "rollback",
+        "all_checkpoints"
+      ],
+      "lines": 86,
+      "sha256": "dc2fdff057c70cf3550ddc52259d511434d8fdb848a1ff1dce60eecccd36a24a"
+    },
+    {
+      "path": "sb_712/corruption_guard.py",
+      "package": "sb_712",
+      "docstring": "SB-712 Corruption Guard",
+      "classes": [
+        "GuardResult",
+        "CorruptionGuard"
+      ],
+      "public_functions": [
+        "intercept",
+        "is_spread_locked",
+        "lift_spread_lock",
+        "prevention_registry",
+        "lesson_store"
+      ],
+      "lines": 237,
+      "sha256": "df22a23d9270d46af32d35d35ad8c63506a3beb22b86145c97f2870c4d41a2c3"
+    },
+    {
+      "path": "sb_712/immunity_node.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "ImmunityNode"
+      ],
+      "public_functions": [
+        "apply_immunity",
+        "convert_to_rule",
+        "block_repeated_pattern",
+        "tighten_gate",
+        "add_quarantine_trigger",
+        "update_hunter_detection",
+        "update_verification_questions",
+        "update_certification_requirements",
+        "add_owner_warning",
+        "tightened_gates",
+        "quarantine_triggers",
+        "hunter_detection_updates",
+        "verification_questions",
+        "certification_requirements",
+        "owner_warnings"
+      ],
+      "lines": 169,
+      "sha256": "2731bad6f41dbe84acbb1692f31f3d1b40ad3a8d77286e13f597cfc9f7c24fda"
+    },
+    {
+      "path": "sb_712/incident.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "IncidentType",
+        "SourceType",
+        "Severity",
+        "IncidentStatus",
+        "IncidentStudyRecord"
+      ],
+      "public_functions": [],
+      "lines": 125,
+      "sha256": "64ccdc70b11dde38c5a47169268d423e72c777c66e9074937dcaab7b50829fce"
+    },
+    {
+      "path": "sb_712/learning_node.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "LearningNode"
+      ],
+      "public_functions": [
+        "process",
+        "write_lesson_report",
+        "all_lesson_reports"
+      ],
+      "lines": 113,
+      "sha256": "22131e845f8d4f03a07784539b98ce61dd5551469a4633ff896525156478f6dc"
+    },
+    {
+      "path": "sb_712/lesson_store.py",
+      "package": "sb_712",
+      "docstring": "SB-712 Lesson Store",
+      "classes": [
+        "LessonStore"
+      ],
+      "public_functions": [
+        "record",
+        "load_lesson",
+        "all_index_entries",
+        "entries_for_type",
+        "count"
+      ],
+      "lines": 117,
+      "sha256": "c89b66e42174a1eb12428bafe7dd5d5930d5b63a1376e421d864c800583b2d40"
+    },
+    {
+      "path": "sb_712/prevention.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "PreventionRule",
+        "PreventionRegistry"
+      ],
+      "public_functions": [
+        "add_rule",
+        "block_pattern",
+        "is_blocked",
+        "get_rules_for_type",
+        "all_rules",
+        "deactivate_rule"
+      ],
+      "lines": 111,
+      "sha256": "e30300c96d47993d80d2e7e6608461d62ac5d4e0d5e81ec8abc65748c7ea3fc3"
+    },
+    {
+      "path": "sb_712/recovery.py",
+      "package": "sb_712",
+      "docstring": "SB-712 Recovery Engine",
+      "classes": [
+        "ConvoyStage",
+        "ConvoyStageResult",
+        "ReturnCheckStage",
+        "ReturnCheckStageResult",
+        "PhoenixDecision",
+        "ReturnCheckResult",
+        "ConvoyResult",
+        "RecoveryMethod",
+        "RecoveryResult",
+        "_ForwardConvoy",
+        "_ReturnCheck",
+        "ConvoyRecovery",
+        "RecoveryOrchestrator"
+      ],
+      "public_functions": [
+        "run",
+        "run",
+        "run",
+        "decide_method",
+        "recover"
+      ],
+      "lines": 522,
+      "sha256": "52ae6f6b4448558b83e2619f74341633223e877e142b213054a5bb9774cdc268"
+    },
+    {
+      "path": "sb_712/report.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [],
+      "public_functions": [
+        "generate_report"
+      ],
+      "lines": 55,
+      "sha256": "ceed7e8149f243ce21a3466f2de123c686e87f48ed0d3985a5e1ce648981bda4"
+    },
+    {
+      "path": "sb_712/sb689.py",
+      "package": "sb_712",
+      "docstring": "SB-689 Free-Flow Pipeline",
+      "classes": [
+        "FlowPacket",
+        "ChannelStats",
+        "FlowChannel",
+        "PipelineRun",
+        "FreeFlowPipeline"
+      ],
+      "public_functions": [
+        "make_packet",
+        "verify_seal",
+        "send",
+        "receive_all",
+        "pending",
+        "success_rate",
+        "add_channel",
+        "add_processor",
+        "run",
+        "channel_stats",
+        "run_history",
+        "total_packets_routed"
+      ],
+      "lines": 274,
+      "sha256": "e6f9022e0fc22507bcc2c3cc277f800f7c10af458e2e54574ef3309a24ae4f72"
+    },
+    {
+      "path": "sb_712/security.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "TokenValidationError",
+        "TokenClaims",
+        "JWTAuthManager",
+        "SecurityPolicy",
+        "RateLimiter",
+        "EncryptedAuditRecord",
+        "EncryptedAuditTrail",
+        "TrustedOperationResult",
+        "TrustedOperationGateway",
+        "SupabaseSecurityBlueprint",
+        "VSCodeWorkspaceBlueprint",
+        "WindowsServiceInstallerBlueprint"
+      ],
+      "public_functions": [
+        "render_env_template",
+        "build_runtime_manifest",
+        "to_payload",
+        "issue_token",
+        "validate_bearer_header",
+        "validate_token",
+        "role_allowed",
+        "cors_headers",
+        "csp_header",
+        "backend_manifest",
+        "frontend_manifest",
+        "allow",
+        "rotate_key",
+        "append",
+        "records",
+        "decrypt",
+        "verify_integrity",
+        "merkle_root",
+        "verify_membership",
+        "authorize_operation",
+        "render_migration_sql",
+        "render_rollback_sql",
+        "manifest",
+        "launch_json",
+        "settings_json",
+        "extensions_json",
+        "manifest",
+        "render_script",
+        "manifest"
+      ],
+      "lines": 726,
+      "sha256": "6107ee44c3b110d1cdfd562bfcde35983086a7a4bd0cadac8a240f2ddf31f422"
+    },
+    {
+      "path": "sb_712/service_host.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [],
+      "public_functions": [
+        "main"
+      ],
+      "lines": 64,
+      "sha256": "a05170677462cb16079924be231aa7f4980c0d32390a5ddfc046bccbe13ef22b"
+    },
+    {
+      "path": "sb_712/system.py",
+      "package": "sb_712",
+      "docstring": "",
+      "classes": [
+        "ClassificationStage",
+        "TrustStatus",
+        "QuarantineState",
+        "HeartbeatLevel",
+        "SystemConfig",
+        "VerificationEvidence",
+        "QuarantineRecord",
+        "LedgerEntry",
+        "ProofLedger",
+        "TrustGateResult",
+        "SystemHealth",
+        "HeartbeatMonitor",
+        "TrustGatePipeline"
+      ],
+      "public_functions": [
+        "validate",
+        "passed",
+        "transition",
+        "append",
+        "entries",
+        "verify_integrity",
+        "evaluate",
+        "latest",
+        "process",
+        "quarantine_record"
+      ],
+      "lines": 359,
+      "sha256": "e02304a4053d656c9c056fb171e6051d5747d549987c1d254859627727fa117c"
+    },
+    {
+      "path": "src/sb688/__init__.py",
+      "package": "src/sb688",
+      "docstring": "SB688 \u2014 Universal Data Integrity System.",
+      "classes": [],
+      "public_functions": [],
+      "lines": 38,
+      "sha256": "cbdaa872c96392626811f8d07eaa3ef9b632054f4a115c48addd60b2bdc7d7c7"
+    },
+    {
+      "path": "src/sb688/clock.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Logical Clocks \u2014 causality tracking across distributed nodes.",
+      "classes": [
+        "LamportClock",
+        "VectorClock",
+        "TimestampedRecord"
+      ],
+      "public_functions": [
+        "tick",
+        "update",
+        "time",
+        "tick",
+        "update",
+        "happens_before",
+        "concurrent",
+        "snapshot"
+      ],
+      "lines": 98,
+      "sha256": "abba42a460da78ba535014fe7d23bd7e89256827f4ad8bc8e84491ee5c1054e3"
+    },
+    {
+      "path": "src/sb688/crypto.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Encryption layer \u2014 AES-256-GCM.",
+      "classes": [
+        "EncryptionError",
+        "EncryptedStore"
+      ],
+      "public_functions": [
+        "rotate_key",
+        "put",
+        "get",
+        "delete",
+        "inject_corruption"
+      ],
+      "lines": 102,
+      "sha256": "bae16fb5a487908c6199f08eb5642055c99144abdd6293e4a41a76fa60e48357"
+    },
+    {
+      "path": "src/sb688/ecc.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Erasure Coding (ECC) \u2014 XOR-parity shard encoding.",
+      "classes": [
+        "ECCEncoder"
+      ],
+      "public_functions": [
+        "encode",
+        "decode",
+        "verify_shards"
+      ],
+      "lines": 92,
+      "sha256": "e0e1ce9c0f8e1630e156c1eb1b570d3c3927b2b5043bfb781ad3b9e6e5e385d0"
+    },
+    {
+      "path": "src/sb688/integrity.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Integrity Checker and self-healing coordinator.",
+      "classes": [
+        "IntegrityEvent",
+        "IntegrityChecker"
+      ],
+      "public_functions": [
+        "scan",
+        "heal",
+        "scan_and_heal",
+        "verify_audit_chain",
+        "is_idempotent_repair",
+        "audit_log"
+      ],
+      "lines": 132,
+      "sha256": "b166ed1b930ae487de3d5da03763cbafd8c85a8bfe4d8f5ac74e54a9a6d9e5fc"
+    },
+    {
+      "path": "src/sb688/merkle.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Merkle Tree \u2014 immutability proofs.",
+      "classes": [
+        "MerkleTree"
+      ],
+      "public_functions": [
+        "root",
+        "proof",
+        "verify_proof"
+      ],
+      "lines": 107,
+      "sha256": "063f2a5ef534e6989ffd92ffa70a70383d4f50f65b0b8b37a8fd7291f00207c1"
+    },
+    {
+      "path": "src/sb688/replica.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Replication \u2014 N-replica set with quorum writes.",
+      "classes": [
+        "PartitionError",
+        "ReplicaSet"
+      ],
+      "public_functions": [
+        "partition",
+        "heal_partition",
+        "put",
+        "get",
+        "delete",
+        "sync",
+        "corrupt_replica",
+        "kill_replicas",
+        "replica_count",
+        "get_replica",
+        "quorum_consistent"
+      ],
+      "lines": 167,
+      "sha256": "29f16ca26354d13128f43f3e830f9ef6ffc4f48c0f57a23fc34df353cfb2f256"
+    },
+    {
+      "path": "src/sb688/rule_of_three.py",
+      "package": "src/sb688",
+      "docstring": "",
+      "classes": [
+        "TrustStage",
+        "TrustEvidence",
+        "TrustGate"
+      ],
+      "public_functions": [
+        "verify",
+        "re_verify",
+        "certify",
+        "quarantine",
+        "is_trusted",
+        "is_quarantined",
+        "report"
+      ],
+      "lines": 162,
+      "sha256": "0abdd7f7d1c98114469b78f7cb45c4ded641b67e587585b4819bdffea2028a43"
+    },
+    {
+      "path": "src/sb688/store.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Block Store \u2014 atomic writes with SHA-256 checksums.",
+      "classes": [
+        "SimulatedCrash",
+        "CorruptionError",
+        "Block",
+        "BlockStore"
+      ],
+      "public_functions": [
+        "create",
+        "verify",
+        "with_bit_flip",
+        "arm_crash",
+        "disarm_crash",
+        "put",
+        "get",
+        "get_version",
+        "delete",
+        "keys",
+        "inject_bit_flip",
+        "inject_corrupt_data",
+        "verify_all",
+        "corrupt_keys",
+        "snapshot",
+        "restore_from_snapshot"
+      ],
+      "lines": 185,
+      "sha256": "c3e065e0e3c3d4d4dc5d0c73e31b5e738ed1902585a0dd68a8ff3804f5449923"
+    },
+    {
+      "path": "src/sb688/wal.py",
+      "package": "src/sb688",
+      "docstring": "SB688 Write-Ahead Log (WAL) and DurableStore.",
+      "classes": [
+        "WALOp",
+        "WALCorruptionError",
+        "WALEntry",
+        "WriteAheadLog",
+        "DurableStore"
+      ],
+      "public_functions": [
+        "create",
+        "verify",
+        "data",
+        "log_put",
+        "log_delete",
+        "commit",
+        "checkpoint",
+        "recover",
+        "verify_all",
+        "put",
+        "get",
+        "delete",
+        "recover",
+        "store",
+        "wal"
+      ],
+      "lines": 213,
+      "sha256": "2a446da5cde20eab6d15df14b1309d3a4cb0618271f7efceac89fde863a04d69"
+    },
+    {
+      "path": "src/stitch_brick/__init__.py",
+      "package": "src/stitch_brick",
+      "docstring": "SB-712 Stitch Brick \u2014 validation framework.",
+      "classes": [],
+      "public_functions": [],
+      "lines": 43,
+      "sha256": "ebbc76556c12cb70b15469a3df8758cba1a27381c4ca5a93a0824b755baa6eac"
+    },
+    {
+      "path": "src/stitch_brick/braid.py",
+      "package": "src/stitch_brick",
+      "docstring": "Braid \u2014 orchestration layer managing a set of BrickModules connected via Strands.",
+      "classes": [
+        "VerificationGate",
+        "BraidOrchestrator"
+      ],
+      "public_functions": [
+        "verify",
+        "process_round",
+        "spine",
+        "brick",
+        "strand",
+        "brick_ids",
+        "healthy_brick_count",
+        "failed_brick_count",
+        "verification_failures",
+        "committed_count"
+      ],
+      "lines": 257,
+      "sha256": "33534d62ef848d0dd4cd126c8653bdc3a0a967acead9d3e8bbbadff97590860b"
+    },
+    {
+      "path": "src/stitch_brick/brick.py",
+      "package": "src/stitch_brick",
+      "docstring": "Brick module \u2014 fundamental computational unit of SB-712 Stitch Brick.",
+      "classes": [
+        "BrickState",
+        "BrickOutput",
+        "BrickModule"
+      ],
+      "public_functions": [
+        "verify_seal",
+        "as_dict",
+        "compute",
+        "inject_fault",
+        "clear_fault",
+        "mark_healthy",
+        "mark_quarantined"
+      ],
+      "lines": 181,
+      "sha256": "beadf63733c9ab32c67572421366e3d48ace97749cf80231a7fd27ef1047ed68"
+    },
+    {
+      "path": "src/stitch_brick/disk_io.py",
+      "package": "src/stitch_brick",
+      "docstring": "Disk persistence helpers for checkpoints and quarantine.",
+      "classes": [
+        "CheckpointDiskManager",
+        "QuarantineDiskManager"
+      ],
+      "public_functions": [
+        "save",
+        "load_latest",
+        "load_latest_raw",
+        "log",
+        "count"
+      ],
+      "lines": 103,
+      "sha256": "5f678a0644acbe70155138d0857effee3d69f32778022b44333b6de168247c7c"
+    },
+    {
+      "path": "src/stitch_brick/fault_injector.py",
+      "package": "src/stitch_brick",
+      "docstring": "FaultInjector \u2014 deterministic, seed-driven fault injection for SB-712 validation.",
+      "classes": [
+        "FaultInjector"
+      ],
+      "public_functions": [
+        "byte_corruption",
+        "ledger_hash_mismatch",
+        "broken_brick",
+        "hallucination",
+        "message_tamper",
+        "network_delay",
+        "mass_failure",
+        "dependency_failure",
+        "recovery_loop_failure",
+        "partial_checkpoint",
+        "disk_write_interrupt"
+      ],
+      "lines": 202,
+      "sha256": "da069179bb2770c59d599a4bea42af3602aaa8ce7a96bc0c01a6df183d6ea534"
+    },
+    {
+      "path": "src/stitch_brick/metrics.py",
+      "package": "src/stitch_brick",
+      "docstring": "Metrics collection for SB-712 validation runs.",
+      "classes": [
+        "SingleRunResult",
+        "BatchMetrics",
+        "MetricsCollector"
+      ],
+      "public_functions": [
+        "passed",
+        "as_dict",
+        "as_dict",
+        "record",
+        "compute"
+      ],
+      "lines": 169,
+      "sha256": "c0cb2cbaf3d3ae75819ea7a69c890100071cf25ad4baef100d5b916d70c97f17"
+    },
+    {
+      "path": "src/stitch_brick/proof_generator.py",
+      "package": "src/stitch_brick",
+      "docstring": "ProofGenerator \u2014 generates reproducible evidence reports from BatchMetrics.",
+      "classes": [
+        "ProofGenerator"
+      ],
+      "public_functions": [
+        "generate_all"
+      ],
+      "lines": 338,
+      "sha256": "516a59974c859059eb34d99e7d252e20b111bf3d7e999c2f01521f4089b1f05b"
+    },
+    {
+      "path": "src/stitch_brick/spine.py",
+      "package": "src/stitch_brick",
+      "docstring": "ProtectedSpine \u2014 the system's authoritative trusted state store.",
+      "classes": [
+        "SpineVerificationError",
+        "SpineEntry",
+        "ProtectedSpine"
+      ],
+      "public_functions": [
+        "propose_state",
+        "verify_integrity",
+        "current_seal",
+        "chain_seal",
+        "entry_count",
+        "get_entry",
+        "snapshot"
+      ],
+      "lines": 187,
+      "sha256": "27b6c725e66796441c0dbfcdd4f347b1853c7469205d379e5d4bd096674cefaf"
+    },
+    {
+      "path": "src/stitch_brick/strand.py",
+      "package": "src/stitch_brick",
+      "docstring": "Strand \u2014 tamper-evident communication channel between bricks.",
+      "classes": [
+        "MessageEnvelope",
+        "StrandChannel"
+      ],
+      "public_functions": [
+        "verify_seal",
+        "as_dict",
+        "send",
+        "receive",
+        "inject_tamper",
+        "set_delay",
+        "clear_fault",
+        "pending"
+      ],
+      "lines": 128,
+      "sha256": "14bfc122a70b0c8fb6e3e53aefc0f3b94b3e0a6663adbac3b7655c7644ab5dda"
+    },
+    {
+      "path": "src/stitch_brick/validator.py",
+      "package": "src/stitch_brick",
+      "docstring": "ValidationRunner \u2014 end-to-end SB-712 validation orchestrator.",
+      "classes": [
+        "ValidationRunner"
+      ],
+      "public_functions": [
+        "run_single_test",
+        "run_batch"
+      ],
+      "lines": 257,
+      "sha256": "fd9ce599c59ab438f8245eb5440cd3e7052a7999d0c5f28e2a13ebb335a5ecf7"
+    }
+  ]
+}
