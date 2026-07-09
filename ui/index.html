@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SB-712 IronBraid — Control Room</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-bar">
+      <span class="logo">⬡ SB-712 IRONBRAID RADIANT CORE</span>
+      <span class="tagline">Universal Data Integrity Intelligence System</span>
+      <span id="clock" class="clock">--:--:--</span>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <!-- Ledger Status -->
+    <section class="panel" id="panel-ledger">
+      <h2>Ledger Status</h2>
+      <div class="metric-row">
+        <div class="metric">
+          <span class="metric-label">Chain State</span>
+          <span class="metric-value" id="ledger-chain-state">INTACT</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Sequence</span>
+          <span class="metric-value" id="ledger-seq">0</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Mirror Agreement</span>
+          <span class="metric-value" id="ledger-mirror">—</span>
+        </div>
+      </div>
+      <div class="last-hash">
+        <span class="label">Head Hash:</span>
+        <code id="ledger-head-hash">—</code>
+      </div>
+    </section>
+
+    <!-- Quarantine Count -->
+    <section class="panel" id="panel-quarantine">
+      <h2>Quarantine</h2>
+      <div class="metric-row">
+        <div class="metric">
+          <span class="metric-label">Items Quarantined</span>
+          <span class="metric-value alert" id="quarantine-count">0</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Awaiting Review</span>
+          <span class="metric-value" id="quarantine-pending">0</span>
+        </div>
+      </div>
+      <ul class="item-list" id="quarantine-list">
+        <li class="placeholder">No quarantined items.</li>
+      </ul>
+    </section>
+
+    <!-- Checkpoint Health -->
+    <section class="panel" id="panel-checkpoints">
+      <h2>Checkpoint Health</h2>
+      <div class="phoenix-grid">
+        <div class="phoenix-node" id="phoenix-a">
+          <span class="node-label">Phoenix A</span>
+          <span class="node-state dormant">DORMANT</span>
+        </div>
+        <div class="phoenix-node" id="phoenix-b">
+          <span class="node-label">Phoenix B</span>
+          <span class="node-state dormant">DORMANT</span>
+        </div>
+        <div class="phoenix-node" id="phoenix-c">
+          <span class="node-label">Phoenix C</span>
+          <span class="node-state dormant">DORMANT</span>
+        </div>
+        <div class="phoenix-node" id="ghost">
+          <span class="node-label">Ghost</span>
+          <span class="node-state dormant">DORMANT</span>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div class="metric">
+          <span class="metric-label">Last Certified</span>
+          <span class="metric-value" id="last-checkpoint">—</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Certified Count</span>
+          <span class="metric-value" id="checkpoint-count">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof Report Log -->
+    <section class="panel panel-wide" id="panel-proof">
+      <h2>Proof Report Log</h2>
+      <div class="report-toolbar">
+        <button id="btn-refresh" onclick="refreshReports()">↻ Refresh</button>
+        <span class="report-count">Showing <span id="report-count">0</span> report(s)</span>
+      </div>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Run ID</th>
+            <th>Files Scanned</th>
+            <th>Mutations</th>
+            <th>Risk Level</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="proof-table-body">
+          <tr><td colspan="6" class="placeholder">No proof reports yet. Run the entrypoint to generate one.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="disclaimer">
+      ⚠ SB-712 is a software-layer integrity system. It cannot guarantee
+      survival of actual space radiation events without hardened hardware
+      (ECC memory, redundant compute, shielding, and independent radiation
+      testing). No unverifiable guarantees are made.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

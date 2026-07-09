@@ -1,0 +1,17 @@
+{
+  "test_id": 720,
+  "seed": 720,
+  "scenario": "hallucination_containment",
+  "fault_type": "hallucination",
+  "fault_target": "brick-002",
+  "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+  "bricks_failed": 1,
+  "detection_failures": [
+    {
+      "brick_id": "brick-002",
+      "reason": "semantic: output does not match expected computation for brick 'brick-002' (expected 7a5f1180\u2026, got 9cb2262e\u2026)",
+      "hash_ok": true,
+      "semantic_ok": false
+    }
+  ]
+}

@@ -832,3 +832,74 @@ The `sb_712.security` module extends that slice with upgrade-ready security and 
 - `EncryptedAuditTrail` + `TrustedOperationGateway` for AES-256-GCM audit logging, Merkle-backed trust proofs, and proof-ledger attestation.
 - `SupabaseSecurityBlueprint` for encrypted audit/trust tables, RLS policies, realtime publication, version tracking, and rollback SQL.
 - `VSCodeWorkspaceBlueprint`, `.vscode/`, `.env.example`, and `scripts/install-sb712-service.ps1` for local debugging and Windows service deployment.
+
+---
+
+## IronBraid Quickstart
+
+### Requirements
+
+- Python 3.9+
+- `pytest` (for tests only)
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run the integrity scan
+
+```bash
+python run_sb712_ironbraid.py
+```
+
+This will:
+1. Ensure all required folders exist.
+2. Run a hash-based integrity scan over `spine/` and `ledger/`.
+3. Write a proof-report JSON file to `reports/daily/proof/`.
+
+**Windows:**
+
+```
+RUN_SB712_IRONBRAID.bat
+```
+
+### View the Control Room UI
+
+Open `ui/index.html` in a browser, or serve it locally:
+
+```bash
+python -m http.server 8080 --directory ui
+```
+
+---
+
+## Intelligence Layer
+
+| Module | Role |
+|---|---|
+| `intelligence/fieldview_encoder.py` | File hash scanning and mutation detection |
+| `intelligence/forecast_node.py` | Risk prediction from field snapshots |
+| `intelligence/mask_evaluator.py` | Proximity-to-Spine risk scoring |
+| `intelligence/vera_gate.py` | Triple-certification gate (VERA) |
+| `intelligence/ava_coordinator.py` | Workflow coordination under owner authority |
+| `intelligence/receptor_registry.py` | Signal-permission registry for nodes |
+
+## Recovery Layer
+
+| Module | Role |
+|---|---|
+| `recovery/phoenix_triangle.py` | Three-node recovery cluster with lineage checks |
+| `recovery/rollback_engine.py` | Rollback to most recent certified checkpoint |
+| `recovery/route_healer.py` | BFS bypass routing around failed nodes |
+| `recovery/checkpoint_validator.py` | Continuity and integrity validation |
+
+---
+
+## Deployment Levels
+
+| Level | Environment | Key Requirements |
+|---|---|---|
+| 1 | Local business / JGA | Windows, Python, file monitoring |
+| 2 | Edge devices, kiosks | Offline-first, signed intake, cold storage |
+| 3 | Industrial / harsh | Redundant nodes, hot/warm/cold replicas |
+| 4 | Space-style research | ECC RAM, rad-hardened hardware, formal testing |

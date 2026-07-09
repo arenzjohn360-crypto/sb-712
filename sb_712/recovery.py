@@ -19,7 +19,7 @@ Decision rule (locked law):
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import List, Optional
 
@@ -113,7 +113,7 @@ class RecoveryResult:
     incident_id: str
     convoy_result: Optional[ConvoyResult] = None
     rollback_result: Optional[RollbackResult] = None
-    completed_at: datetime = field(default_factory=datetime.utcnow)
+    completed_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     notes: str = ""
 
 

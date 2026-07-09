@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 import uuid
 
@@ -12,7 +12,7 @@ class PreventionRule:
     incident_type: IncidentType
     trigger_condition: str
     action: str
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     active: bool = True
     source_incident_id: Optional[str] = None
 

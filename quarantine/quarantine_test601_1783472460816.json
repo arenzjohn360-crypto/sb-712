@@ -1,0 +1,53 @@
+{
+  "test_id": 601,
+  "seed": 601,
+  "scenario": "recovery_loop_failure",
+  "fault_type": "recovery_loop_failure",
+  "fault_target": "brick-000,brick-001,brick-002,brick-003,brick-004,brick-005,brick-006,brick-007,brick-008,brick-009",
+  "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+  "bricks_failed": 1,
+  "detection_failures": [
+    {
+      "brick_id": "brick-000",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-001",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-002",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-003",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-004",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-005",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-006",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-007",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-008",
+      "reason": "brick unavailable: state=FAILED"
+    },
+    {
+      "brick_id": "brick-009",
+      "reason": "hash: seal mismatch for brick 'brick-009'",
+      "hash_ok": false,
+      "semantic_ok": false
+    }
+  ]
+}

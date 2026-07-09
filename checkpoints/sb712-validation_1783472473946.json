@@ -1,0 +1,81 @@
+{
+  "seal": "95f72d7d8a1acea21f6b31b7e26fdfc9e7ca557d58a054fe33f3fe1c120a7bd5",
+  "data": {
+    "sequence": 10,
+    "entry_count": 10,
+    "current_seal": "1b3c4c6c5bc7126dfc8f3252f4bc4064d9e4cc1e1fcc196a046fbd28e4f45941",
+    "chain_seal": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+    "entries": [
+      {
+        "sequence": 1,
+        "state_key": "brick-000.output",
+        "state_seal": "fbffb9d94b5b409f3db115c6fa9e69ddf5fd5ac0d83b4b0573d676864537de27",
+        "timestamp": 1783472473.9464447,
+        "ledger_hash": "8733addfd84a1571f521604a6d04e809b33b4039add500484a82dcc5c820560a"
+      },
+      {
+        "sequence": 2,
+        "state_key": "brick-001.output",
+        "state_seal": "63f0a33c6fd540dd636ad44d3da9cf310117ffcf22caa791950db4e981ba967e",
+        "timestamp": 1783472473.9464655,
+        "ledger_hash": "653a94e2b99225b2824d7f1d0ece8c1b1e532d1a098adee3fbe6d1a86df7d1c3"
+      },
+      {
+        "sequence": 3,
+        "state_key": "brick-002.output",
+        "state_seal": "2079d6ca73e06931ce8483c0cfdb5cd6f539788359e2b4744dba9dcbf66e69f0",
+        "timestamp": 1783472473.9464872,
+        "ledger_hash": "507b65d4a25cf60c498f70c797d421431d32ef042fb3298abc9274aade435a3c"
+      },
+      {
+        "sequence": 4,
+        "state_key": "brick-003.output",
+        "state_seal": "98fee4591e3a37a156b2e55c8fb876796c66a73b77ecfd6297f2b48134d1d8e5",
+        "timestamp": 1783472473.946511,
+        "ledger_hash": "3e14be73600c251177ab9a3d0936869b24ab6a78a5b616afaf9d41d535ba264e"
+      },
+      {
+        "sequence": 5,
+        "state_key": "brick-004.output",
+        "state_seal": "4809568b6282694530b5c461fafad7c3bac4136408c31aa8b9310d4ca42ec924",
+        "timestamp": 1783472473.9465384,
+        "ledger_hash": "2c71ad371c05d926a454d2478e94c0b05c056b12cffcf26dd1acd3435442b079"
+      },
+      {
+        "sequence": 6,
+        "state_key": "brick-005.output",
+        "state_seal": "61b7b6da9d41e8b41a0198c082bb7b85a46724f04219a9ca528a90b549461800",
+        "timestamp": 1783472473.9465685,
+        "ledger_hash": "78bb6daf27c09e57673c3df904bb26b7c4c0ea1e8d68447d346e2167d4460ac9"
+      },
+      {
+        "sequence": 7,
+        "state_key": "brick-006.output",
+        "state_seal": "2392a425c24d175ccecb7b19816eb52938235d19dd747dff6541be0230c6cfd2",
+        "timestamp": 1783472473.946603,
+        "ledger_hash": "4f40987eefadd6cc25574c73acfe6056f5bab9a214cb1c4dedfe5a1cb715a44a"
+      },
+      {
+        "sequence": 8,
+        "state_key": "brick-007.output",
+        "state_seal": "618add3e2599cebd4008692d3f27348f1974d36d2722ecfbf0b93b88d8add577",
+        "timestamp": 1783472473.9466405,
+        "ledger_hash": "59dc3fd88f294365723856dccdb4526f1f3c654688ac8ce236cd8fccbe6a9d0e"
+      },
+      {
+        "sequence": 9,
+        "state_key": "brick-008.output",
+        "state_seal": "3af2cdf5a4dc213cfbde7a2c177b32a45330f0077885f485c9f076f738ef675d",
+        "timestamp": 1783472473.9466813,
+        "ledger_hash": "a387c82cacf25c42ecf5cf654ae1d55cd8efbfa41919fea7fc45a2f2767f4ca8"
+      },
+      {
+        "sequence": 10,
+        "state_key": "brick-009.output",
+        "state_seal": "1b3c4c6c5bc7126dfc8f3252f4bc4064d9e4cc1e1fcc196a046fbd28e4f45941",
+        "timestamp": 1783472473.946726,
+        "ledger_hash": "ba209625162cdea4b55d52006b8299df84b4bef24c9c25923cfa11b549bda2ba"
+      }
+    ]
+  }
+}
