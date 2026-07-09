@@ -64,7 +64,7 @@ if errorlevel 1 (
 echo.
 
 :: ── 5. Run test suite ─────────────────────────────────────────
-echo [4/4] Running test suite (418 tests expected)...
+echo [4/5] Running test suite (418 tests expected)...
 python -m pytest tests\ -q --tb=short
 if errorlevel 1 (
     echo.
@@ -74,6 +74,26 @@ if errorlevel 1 (
 ) else (
     echo.
     echo  All tests passed.
+)
+echo.
+
+:: ── 6. Register watchdog scheduled task (optional) ────────────
+echo [5/5] Registering SB712 watchdog startup task...
+if exist "%~dp0sb712_watchdog.py" (
+    schtasks /query /tn "SB712Watchdog" >nul 2>&1
+    if not errorlevel 1 (
+        schtasks /delete /tn "SB712Watchdog" /f >nul 2>&1
+    )
+    schtasks /create /tn "SB712Watchdog" /sc onlogon /rl LIMITED /tr "\"python\" \"%~dp0sb712_watchdog.py\"" /f >nul 2>&1
+    if errorlevel 1 (
+        echo WARNING: Could not register scheduled task automatically.
+        echo          You can run manually:
+        echo          schtasks /create /tn "SB712Watchdog" /sc onlogon /rl LIMITED /tr "\"python\" \"%~dp0sb712_watchdog.py\"" /f
+    ) else (
+        echo       Watchdog task 'SB712Watchdog' registered.
+    )
+) else (
+    echo WARNING: sb712_watchdog.py not found; skipping watchdog task setup.
 )
 echo.
 
@@ -89,14 +109,18 @@ echo.
 echo    2. Double-click  RUN_SB712_IRONBRAID.bat  to run a
 echo       full integrity scan and generate your first report.
 echo.
-echo    3. Optional — Windows service install (run as Admin):
+echo    3. Watchdog starts automatically at sign-in via Task Scheduler:
+echo       Task name: SB712Watchdog
+echo       Manual run: python sb712_watchdog.py
+echo.
+echo    4. Optional — Windows service install (run as Admin):
 echo       powershell -ExecutionPolicy Bypass -File scripts\install-sb712-service.ps1
 echo.
-echo    4. Optional — Control Room UI:
+echo    5. Optional — Control Room UI:
 echo       python -m http.server 8080 --directory ui
 echo       Then open  http://localhost:8080  in a browser.
 echo.
-echo    5. Optional — run the validation framework:
+echo    6. Optional — run the validation framework:
 echo       python run_validation.py --tests 100 --scenario byte_corruption
 echo.
 pause

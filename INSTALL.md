@@ -13,6 +13,7 @@
    - Install all Python packages (SB688 + SB-712 + dev extras)
    - Verify all imports resolve cleanly
    - Run the full test suite (418 tests)
+   - Register `SB712Watchdog` in Windows Task Scheduler (on logon)
 3. Copy `.env.example` → `.env` and fill in your secrets (see [Environment Variables](#environment-variables) below).
 4. Double-click **`RUN_SB712_IRONBRAID.bat`** to run your first integrity scan.
 
@@ -112,6 +113,14 @@ python -m sb_712.service_host --heartbeat-once
 ```
 Returns a JSON blob with `heartbeat.level`, `heartbeat.score`, and full security/Supabase config.
 
+### Triple-braided watchdog
+```bash
+python sb712_watchdog.py
+```
+This starts three parallel monitoring strands (file integrity, process/network, and registry/startup) plus a braid supervisor, with incidents persisted in `sb712_incidents.db`.
+
+On Windows, `INSTALL.bat` also registers a Task Scheduler task named `SB712Watchdog` that runs this script at user logon.
+
 ### Control Room UI
 ```bash
 python -m http.server 8080 --directory ui
@@ -152,6 +161,7 @@ sb-712/
 ├── RUN_SB712_IRONBRAID.bat      ← Windows one-click integrity scan
 ├── run_sb712_ironbraid.py       ← Cross-platform integrity scan entrypoint
 ├── run_validation.py            ← Fault-injection validation CLI
+├── sb712_watchdog.py            ← Triple-braided watchdog runtime
 ├── .env.example                 ← Copy to .env and fill in secrets
 ├── pyproject.toml               ← Python package definition
 ├── requirements.txt             ← Flat requirements file
