@@ -51,6 +51,7 @@ tests/test_recovery.py
 tests/test_report.py
 tests/test_rule_of_three.py
 tests/test_sb689.py
+tests/test_sb712_watchdog.py
 tests/test_security.py
 tests/test_self_healing.py
 tests/test_space_environments.py
