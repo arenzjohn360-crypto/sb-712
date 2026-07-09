@@ -54,6 +54,7 @@ tests/test_sb689.py
 tests/test_sb712_watchdog.py
 tests/test_security.py
 tests/test_self_healing.py
+tests/test_service_host.py
 tests/test_space_environments.py
 tests/test_stitch_brick.py
 tests/test_system.py
