@@ -1,8 +1,8 @@
 """
 SB-712 Timing tests: recovery, heal, and resurrection — fast and slow paths.
 
-Fast time  = single/minimal workload; must finish well under 1 second.
-Slow time  = bulk/stress workload; must finish within a generous but bounded SLA.
+Fast time  = single/minimal workload; must finish in under 10 ms.
+Slow time  = bulk/stress workload; must finish in under 10 ms.
 
 These tests assert *correctness* (the operations succeed) AND *time bounds*
 (the operations do not hang or degrade unexpectedly).
@@ -22,27 +22,29 @@ from sb_712.recovery import (
 from sb688 import BlockStore, IntegrityChecker
 
 # ---------------------------------------------------------------------------
-# SLA constants (seconds)
+# SLA constants (seconds) — all operations must complete in under 10 ms
 # ---------------------------------------------------------------------------
 
-# A single clean recovery convoy must complete in well under 1 s.
-RECOVERY_FAST_SLA_S = 1.0
+SLA_10MS = 0.010  # 10 milliseconds
+
+# A single clean recovery convoy must complete in under 10 ms.
+RECOVERY_FAST_SLA_S = SLA_10MS
 
 # A worst-case convoy (3 retries → rollback with 50-checkpoint registry) must
-# complete in under 5 s.
-RECOVERY_SLOW_SLA_S = 5.0
+# complete in under 10 ms.
+RECOVERY_SLOW_SLA_S = SLA_10MS
 
-# Healing a single corrupt block must be near-instant (< 0.5 s).
-HEAL_FAST_SLA_S = 0.5
+# Healing a single corrupt block must complete in under 10 ms.
+HEAL_FAST_SLA_S = SLA_10MS
 
-# Healing 500 corrupt blocks (bulk scan-and-heal) must finish in under 10 s.
-HEAL_SLOW_SLA_S = 10.0
+# Healing 500 corrupt blocks (bulk scan-and-heal) must complete in under 10 ms.
+HEAL_SLOW_SLA_S = SLA_10MS
 
-# Rolling back from a single-checkpoint registry must be near-instant.
-RESURRECTION_FAST_SLA_S = 0.5
+# Rolling back from a single-checkpoint registry must complete in under 10 ms.
+RESURRECTION_FAST_SLA_S = SLA_10MS
 
-# Rolling back from a 100-checkpoint registry must finish in under 3 s.
-RESURRECTION_SLOW_SLA_S = 3.0
+# Rolling back from a 100-checkpoint registry must complete in under 10 ms.
+RESURRECTION_SLOW_SLA_S = SLA_10MS
 
 
 # ---------------------------------------------------------------------------
