@@ -56,3 +56,4 @@ tests/test_self_healing.py
 tests/test_space_environments.py
 tests/test_stitch_brick.py
 tests/test_system.py
+tests/test_timing_recovery_heal_resurrection.py
