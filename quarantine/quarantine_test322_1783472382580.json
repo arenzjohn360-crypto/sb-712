@@ -1,0 +1,17 @@
+{
+  "test_id": 322,
+  "seed": 322,
+  "scenario": "ledger_drift",
+  "fault_type": "hash_mismatch",
+  "fault_target": "brick-006",
+  "seal_before": "b8e8be2d4cb82cb3e479bfc4cabdd0b634c39d57cf24712fa6e5d445c24ba5bc",
+  "bricks_failed": 1,
+  "detection_failures": [
+    {
+      "brick_id": "brick-006",
+      "reason": "hash: seal mismatch for brick 'brick-006'",
+      "hash_ok": false,
+      "semantic_ok": false
+    }
+  ]
+}

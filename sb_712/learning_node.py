@@ -1,9 +1,12 @@
 import uuid
-from typing import List
+from typing import TYPE_CHECKING, List, Optional
 
 from .incident import IncidentStudyRecord, IncidentType
 from .prevention import PreventionRegistry, PreventionRule
 from .report import generate_report
+
+if TYPE_CHECKING:
+    from .lesson_store import LessonStore
 
 # Incident types where a repeat occurrence is considered high-risk.
 _HIGH_REPEAT_RISK_TYPES = frozenset({
@@ -31,8 +34,13 @@ class LearningNode:
     Every failure becomes a new defense rule.
     """
 
-    def __init__(self, prevention_registry: PreventionRegistry) -> None:
+    def __init__(
+        self,
+        prevention_registry: PreventionRegistry,
+        lesson_store: Optional["LessonStore"] = None,
+    ) -> None:
         self.prevention_registry = prevention_registry
+        self._lesson_store = lesson_store
         self._lesson_reports: List[str] = []
 
     def process(self, record: IncidentStudyRecord) -> str:
@@ -48,6 +56,8 @@ class LearningNode:
         self._flag_checkpoint_created(record)
         report = self.write_lesson_report(record)
         self._lesson_reports.append(report)
+        if self._lesson_store is not None:
+            self._lesson_store.record(record, report)
         return report
 
     # ------------------------------------------------------------------

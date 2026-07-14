@@ -25,6 +25,16 @@ from .recovery import (
 )
 from .learning_node import LearningNode
 from .immunity_node import ImmunityNode
+from .lesson_store import LessonStore
+from .corruption_guard import CorruptionGuard, GuardResult
+from .sb689 import (
+    FlowPacket,
+    FlowChannel,
+    FreeFlowPipeline,
+    PipelineRun,
+    ChannelStats,
+    make_packet,
+)
 from .report import generate_report
 from .system import (
     ClassificationStage,
@@ -40,6 +50,22 @@ from .system import (
     SystemHealth,
     HeartbeatMonitor,
     TrustGatePipeline,
+)
+from .security import (
+    EncryptedAuditRecord,
+    EncryptedAuditTrail,
+    JWTAuthManager,
+    RateLimiter,
+    SecurityPolicy,
+    SupabaseSecurityBlueprint,
+    TokenClaims,
+    TokenValidationError,
+    TrustedOperationGateway,
+    TrustedOperationResult,
+    VSCodeWorkspaceBlueprint,
+    WindowsServiceInstallerBlueprint,
+    build_runtime_manifest,
+    render_env_template,
 )
 
 __all__ = [
@@ -70,6 +96,15 @@ __all__ = [
     "MAX_CONVOY_ATTEMPTS",
     "LearningNode",
     "ImmunityNode",
+    "LessonStore",
+    "CorruptionGuard",
+    "GuardResult",
+    "FlowPacket",
+    "FlowChannel",
+    "FreeFlowPipeline",
+    "PipelineRun",
+    "ChannelStats",
+    "make_packet",
     "generate_report",
     "ClassificationStage",
     "TrustStatus",
@@ -84,4 +119,18 @@ __all__ = [
     "SystemHealth",
     "HeartbeatMonitor",
     "TrustGatePipeline",
+    "TokenValidationError",
+    "TokenClaims",
+    "JWTAuthManager",
+    "SecurityPolicy",
+    "RateLimiter",
+    "EncryptedAuditRecord",
+    "EncryptedAuditTrail",
+    "TrustedOperationResult",
+    "TrustedOperationGateway",
+    "SupabaseSecurityBlueprint",
+    "VSCodeWorkspaceBlueprint",
+    "WindowsServiceInstallerBlueprint",
+    "render_env_template",
+    "build_runtime_manifest",
 ]

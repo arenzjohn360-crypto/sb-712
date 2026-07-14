@@ -1,0 +1,1 @@
+{"seq": 0, "event": "GENESIS", "description": "SB-712 IronBraid Radiant Core ledger initialized", "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000", "entry_hash": "027537725a41be8563b07ad9e852eed2401ebcbbc73fd8701b4df439bcb140e0", "timestamp": "2026-06-24T00:00:00Z", "state": "CERTIFIED", "source": "system", "schema_version": "1.0.0"}
