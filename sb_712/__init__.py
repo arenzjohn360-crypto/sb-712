@@ -26,6 +26,7 @@ from .recovery import (
 from .learning_node import LearningNode
 from .immunity_node import ImmunityNode
 from .report import generate_report
+from .ava import AVAState, AVADecision, AVASession, BRICK_ROUTES
 
 __all__ = [
     "IncidentStudyRecord",
@@ -56,4 +57,8 @@ __all__ = [
     "LearningNode",
     "ImmunityNode",
     "generate_report",
+    "AVAState",
+    "AVADecision",
+    "AVASession",
+    "BRICK_ROUTES",
 ]
