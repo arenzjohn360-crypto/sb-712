@@ -1,0 +1,354 @@
+==============================================================================
+  SB-712 FULL TEST REPORT
+  Generated: 2026-06-26 13:41 UTC
+  Platform : Python 3.12 / pytest
+  Result   : 266/266 PASSED  |  0 FAILED  |  0 WARNINGS
+==============================================================================
+
+  FILE: test_chaos.py
+  --------------------------------------------------------------------------
+    1. test_crash_and_recover_preserves_committed[0]               [PASS]
+    2. test_crash_and_recover_preserves_committed[1]               [PASS]
+    3. test_crash_and_recover_preserves_committed[2]               [PASS]
+    4. test_crash_and_recover_preserves_committed[3]               [PASS]
+    5. test_crash_and_recover_preserves_committed[4]               [PASS]
+    6. test_crash_and_recover_preserves_committed[5]               [PASS]
+    7. test_below_quorum_write_rejected                            [PASS]
+    8. test_below_quorum_original_value_intact                     [PASS]
+    9. test_quorum_majority_write_succeeds                         [PASS]
+   10. test_filesystem_full_no_silent_data_loss                    [PASS]
+   11. test_lamport_clock_causality_across_skew                    [PASS]
+   12. test_vector_clock_detects_concurrent_events                 [PASS]
+   13. test_vector_clock_happens_before                            [PASS]
+   14. test_large_concurrent_writes_no_data_loss                   [PASS]
+   15. test_100pct_corruption_detection_rate                       [PASS]
+   16. test_sync_after_partition_restores_all_data                 [PASS]
+   17. test_last_replica_holds_all_data                            [PASS]
+   18. test_large_small_record_mix_no_fragmentation_loss           [PASS]
+   19. test_out_of_order_writes_correct_reconstruction             [PASS]
+
+  FILE: test_checkpoint.py
+  --------------------------------------------------------------------------
+   20. test_get_last_healthy_certified_returns_most_recent         [PASS]
+   21. test_get_last_healthy_certified_none_when_empty             [PASS]
+   22. test_get_last_healthy_certified_ignores_uncertified         [PASS]
+   23. test_get_last_healthy_certified_ignores_corrupted           [PASS]
+   24. test_get_last_healthy_certified_ignores_degraded            [PASS]
+   25. test_get_last_healthy_certified_ignores_other_projects      [PASS]
+   26. test_rollback_success                                       [PASS]
+   27. test_rollback_fails_no_checkpoint                           [PASS]
+   28. test_rollback_records_reason                                [PASS]
+   29. test_all_checkpoints_no_filter                              [PASS]
+   30. test_all_checkpoints_filter_by_project                      [PASS]
+
+  FILE: test_concurrency.py
+  --------------------------------------------------------------------------
+   31. test_concurrent_disjoint_key_writes                         [PASS]
+   32. test_concurrent_readers_see_valid_data                      [PASS]
+   33. test_concurrent_mixed_operations_no_corruption              [PASS]
+   34. test_sequential_version_monotonicity                        [PASS]
+
+  FILE: test_consistency.py
+  --------------------------------------------------------------------------
+   35. test_atomic_put_fully_applied                               [PASS]
+   36. test_crash_leaves_previous_value_intact                     [PASS]
+   37. test_uncommitted_wal_entry_not_replayed                     [PASS]
+   38. test_committed_entry_is_replayed                            [PASS]
+   39. test_no_torn_read_under_concurrent_writes                   [PASS]
+   40. test_read_sees_committed_write_immediately                  [PASS]
+
+  FILE: test_correctness.py
+  --------------------------------------------------------------------------
+   41. test_write_read_exact[1]                                    [PASS]
+   42. test_write_read_exact[7]                                    [PASS]
+   43. test_write_read_exact[255]                                  [PASS]
+   44. test_write_read_exact[256]                                  [PASS]
+   45. test_write_read_exact[4096]                                 [PASS]
+   46. test_write_read_exact[65536]                                [PASS]
+   47. test_write_read_exact[1048576]                              [PASS]
+   48. test_all_zero_bytes                                         [PASS]
+   49. test_all_ones_bytes                                         [PASS]
+   50. test_binary_patterns[\x00\x01\x02\x03\x04\x05\x06\x07\x...  [PASS]
+   51. test_binary_patterns[\xde\xad\xbe\xef\xde\xad\xbe\xef\x...  [PASS]
+   52. test_binary_patterns[\xca\xfe\xba\xbe\xca\xfe\xba\xbe\x...  [PASS]
+   53. test_empty_value                                            [PASS]
+   54. test_unicode_key                                            [PASS]
+   55. test_large_64mb_value                                       [PASS]
+   56. test_single_bit_flip_detected                               [PASS]
+   57. test_double_bit_flip_detected                               [PASS]
+   58. test_full_data_replacement_detected                         [PASS]
+   59. test_overwrite_returns_new_value                            [PASS]
+   60. test_version_increments_on_overwrite                        [PASS]
+   61. test_delete_removes_key                                     [PASS]
+   62. test_missing_key_raises_key_error                           [PASS]
+   63. test_10k_keys_all_correct                                   [PASS]
+   64. test_verify_all_clean_store                                 [PASS]
+   65. test_verify_all_detects_multiple_corruptions                [PASS]
+
+  FILE: test_durability.py
+  --------------------------------------------------------------------------
+   66. test_crash_before_first_write                               [PASS]
+   67. test_crash_at_every_write_offset_preserves_committed[0]     [PASS]
+   68. test_crash_at_every_write_offset_preserves_committed[1]     [PASS]
+   69. test_crash_at_every_write_offset_preserves_committed[2]     [PASS]
+   70. test_crash_at_every_write_offset_preserves_committed[3]     [PASS]
+   71. test_crash_at_every_write_offset_preserves_committed[4]     [PASS]
+   72. test_crash_at_every_write_offset_preserves_committed[5]     [PASS]
+   73. test_wal_entry_checksums_hold_after_many_writes             [PASS]
+   74. test_snapshot_and_restore                                   [PASS]
+   75. test_recovery_is_idempotent                                 [PASS]
+
+  FILE: test_immunity_node.py
+  --------------------------------------------------------------------------
+   76. test_apply_immunity_tightens_gate_for_source                [PASS]
+   77. test_apply_immunity_tightens_all_unknown_gate_for_unkno...  [PASS]
+   78. test_apply_immunity_blocks_repeated_pattern_when_repeat...  [PASS]
+   79. test_apply_immunity_does_not_block_when_no_repeat_risk      [PASS]
+   80. test_apply_immunity_adds_quarantine_trigger                 [PASS]
+   81. test_apply_immunity_updates_hunter_detection                [PASS]
+   82. test_hunter_detection_deduplicates                          [PASS]
+   83. test_apply_immunity_adds_verification_question              [PASS]
+   84. test_apply_immunity_adds_certification_requirement          [PASS]
+   85. test_verification_questions_deduplicate                     [PASS]
+   86. test_owner_warning_added_for_critical                       [PASS]
+   87. test_owner_warning_added_for_high                           [PASS]
+   88. test_no_owner_warning_for_low_severity                      [PASS]
+   89. test_no_owner_warning_for_medium_severity                   [PASS]
+   90. test_convert_to_rule_registers_when_not_present             [PASS]
+   91. test_convert_to_rule_no_op_when_prevention_rule_empty       [PASS]
+
+  FILE: test_incident.py
+  --------------------------------------------------------------------------
+   92. test_record_defaults                                        [PASS]
+   93. test_record_has_unique_ids                                  [PASS]
+   94. test_record_custom_fields                                   [PASS]
+   95. test_incident_types_complete                                [PASS]
+   96. test_source_types_include_unknown                           [PASS]
+   97. test_severity_levels_ordered                                [PASS]
+   98. test_hunter_rescan_outcomes_defined                         [PASS]
+   99. test_reopen_outcomes_subset_of_all_outcomes                 [PASS]
+  100. test_reopen_outcomes_content                                [PASS]
+
+  FILE: test_industry_agriculture.py
+  --------------------------------------------------------------------------
+  101. TestLongDurationSensorLogs::test_months_offline_sync_co...  [PASS]
+  102. TestLongDurationSensorLogs::test_no_data_gap_in_sequent...  [PASS]
+  103. TestSensorDriftDetection::test_corrupted_calibration_de...  [PASS]
+  104. TestSensorDriftDetection::test_valid_calibration_readable   [PASS]
+  105. TestSensorDriftDetection::test_self_heal_calibration_fr...  [PASS]
+
+  FILE: test_industry_aviation.py
+  --------------------------------------------------------------------------
+  106. TestFlightDataRecorder::test_100pct_durability_under_cr...  [PASS]
+  107. TestFlightDataRecorder::test_100pct_durability_under_cr...  [PASS]
+  108. TestFlightDataRecorder::test_100pct_durability_under_cr...  [PASS]
+  109. TestFlightDataRecorder::test_100pct_durability_under_cr...  [PASS]
+  110. TestFlightDataRecorder::test_100pct_durability_under_cr...  [PASS]
+  111. TestRealTimeTelemetry::test_1k_sensor_writes_no_loss        [PASS]
+  112. TestBlackBoxRecovery::test_ecc_recovers_any_single_shar...  [PASS]
+  113. TestBlackBoxRecovery::test_ecc_recovers_any_single_shar...  [PASS]
+  114. TestBlackBoxRecovery::test_ecc_recovers_any_single_shar...  [PASS]
+  115. TestBlackBoxRecovery::test_ecc_recovers_any_single_shar...  [PASS]
+  116. TestBlackBoxRecovery::test_frame_recovery_from_backup_a...  [PASS]
+
+  FILE: test_industry_energy.py
+  --------------------------------------------------------------------------
+  117. TestSCADAIntegrity::test_merkle_proof_validates_origina...  [PASS]
+  118. TestSCADAIntegrity::test_merkle_proof_fails_for_tampere...  [PASS]
+  119. TestSCADAIntegrity::test_bit_flip_detected_immediately      [PASS]
+  120. TestOfflineEdgeNodeSync::test_72h_air_gap_sync_zero_drift   [PASS]
+  121. TestRollingHashVerification::test_rolling_sha256_chain_...  [PASS]
+  122. TestRollingHashVerification::test_corrupted_reading_bre...  [PASS]
+
+  FILE: test_industry_finance.py
+  --------------------------------------------------------------------------
+  123. TestHighThroughputWrites::test_10k_transactions_no_loss     [PASS]
+  124. TestHighThroughputWrites::test_no_silent_overwrite_of_d...  [PASS]
+  125. TestTransactionOrdering::test_lamport_timestamps_strict...  [PASS]
+  126. TestIdempotentWrite::test_same_key_same_data_increments...  [PASS]
+  127. TestRegulatoryAudit::test_reconstruct_history_from_wal      [PASS]
+  128. TestRegulatoryAudit::test_merkle_immutability_proof         [PASS]
+  129. TestRegulatoryAudit::test_merkle_detects_tampering          [PASS]
+  130. TestBankFailover::test_secondary_has_full_data_after_pr...  [PASS]
+
+  FILE: test_industry_healthcare.py
+  --------------------------------------------------------------------------
+  131. TestHIPAAEncryption::test_plaintext_never_stored_raw        [PASS]
+  132. TestHIPAAEncryption::test_corrupted_ciphertext_raises_n...  [PASS]
+  133. TestHIPAAEncryption::test_decrypted_value_matches_original  [PASS]
+  134. TestPatientRecordVersioning::test_concurrent_updates_no...  [PASS]
+  135. TestPatientRecordVersioning::test_version_advances_on_o...  [PASS]
+  136. TestEmergencyAccessPartition::test_local_replica_readab...  [PASS]
+  137. TestEmergencyAccessPartition::test_partition_below_quor...  [PASS]
+
+  FILE: test_industry_legal.py
+  --------------------------------------------------------------------------
+  138. TestImmutability::test_write_once_provable_via_merkle       [PASS]
+  139. TestImmutability::test_modification_invalidates_proof       [PASS]
+  140. TestLongTermArchival::test_ecc_reconstructs_after_shard...  [PASS]
+  141. TestLongTermArchival::test_ecc_reconstructs_after_shard...  [PASS]
+  142. TestLongTermArchival::test_ecc_reconstructs_after_shard...  [PASS]
+  143. TestLongTermArchival::test_ecc_reconstructs_after_shard...  [PASS]
+  144. TestLongTermArchival::test_checksum_holds_for_1mb_archive   [PASS]
+  145. TestChainOfCustody::test_audit_log_tamper_evident           [PASS]
+  146. TestChainOfCustody::test_all_corrupt_keys_appear_in_aud...  [PASS]
+
+  FILE: test_industry_manufacturing.py
+  --------------------------------------------------------------------------
+  147. TestConcurrentDeviceWrites::test_100k_device_writes_no_...  [PASS]
+  148. TestConcurrentDeviceWrites::test_concurrent_device_thre...  [PASS]
+  149. TestFirmwareOTAUpdate::test_partial_ota_rollback_on_crash   [PASS]
+  150. TestFirmwareOTAUpdate::test_ota_sha256_checksum_verified    [PASS]
+  151. TestSubMillisecondLatency::test_p9999_write_latency_sub...  [PASS]
+
+  FILE: test_industry_media.py
+  --------------------------------------------------------------------------
+  152. TestVideoStreamingIntegrity::test_write_while_read_no_t...  [PASS]
+  153. TestCDNReplication::test_50_node_replication_eventually...  [PASS]
+
+  FILE: test_industry_military.py
+  --------------------------------------------------------------------------
+  154. TestEMPBitFlip::test_emp_simulation_100pct_detection        [PASS]
+  155. TestEncryptionKeyRotation::test_old_records_readable_af...  [PASS]
+  156. TestEncryptionKeyRotation::test_new_writes_use_new_key_id   [PASS]
+  157. TestStoreAndForward::test_sha256_proof_of_delivery          [PASS]
+  158. TestStoreAndForward::test_intermittent_connectivity_eve...  [PASS]
+
+  FILE: test_industry_telecom.py
+  --------------------------------------------------------------------------
+  159. TestHighThroughputMicroRecords::test_1m_micro_records_n...  [PASS]
+  160. TestHighThroughputMicroRecords::test_idempotent_write_u...  [PASS]
+  161. TestCallRecordAudit::test_10k_call_records_all_retrievable  [PASS]
+  162. TestCallRecordAudit::test_lamport_clock_no_duplicate_ti...  [PASS]
+
+  FILE: test_learning_node.py
+  --------------------------------------------------------------------------
+  163. test_process_derives_root_cause                             [PASS]
+  164. test_process_does_not_overwrite_existing_root_cause         [PASS]
+  165. test_process_creates_prevention_rule                        [PASS]
+  166. test_process_does_not_overwrite_manual_prevention_rule      [PASS]
+  167. test_process_flags_hunter_and_verification_updated          [PASS]
+  168. test_process_sets_checkpoint_created                        [PASS]
+  169. test_repeat_risk_flagged_for_payment_mismatch               [PASS]
+  170. test_repeat_risk_flagged_for_ledger_drift                   [PASS]
+  171. test_repeat_risk_not_flagged_for_low_risk                   [PASS]
+  172. test_process_returns_report_string                          [PASS]
+  173. test_all_lesson_reports_accumulate                          [PASS]
+  174. test_all_lesson_reports_returns_copy                        [PASS]
+
+  FILE: test_prevention.py
+  --------------------------------------------------------------------------
+  175. test_default_rules_seeded                                   [PASS]
+  176. test_add_rule_increases_count                               [PASS]
+  177. test_get_rules_for_type_returns_only_matching               [PASS]
+  178. test_get_rules_for_type_excludes_inactive                   [PASS]
+  179. test_block_pattern                                          [PASS]
+  180. test_block_pattern_multiple                                 [PASS]
+  181. test_deactivate_rule_returns_true                           [PASS]
+  182. test_deactivate_nonexistent_rule_returns_false              [PASS]
+  183. test_all_rules_returns_copy                                 [PASS]
+
+  FILE: test_recovery.py
+  --------------------------------------------------------------------------
+  184. test_convoy_chosen_for_local_damage                         [PASS]
+  185. test_rollback_chosen_for_trigger_flags[spine_threatened...  [PASS]
+  186. test_rollback_chosen_for_trigger_flags[ledger_corrupted...  [PASS]
+  187. test_rollback_chosen_for_trigger_flags[nodes_disagree-T...  [PASS]
+  188. test_rollback_chosen_for_trigger_flags[checkpoint_linea...  [PASS]
+  189. test_rollback_chosen_for_trigger_flags[master_phoenix_c...  [PASS]
+  190. test_rollback_chosen_for_repeated_attack                    [PASS]
+  191. test_convoy_recovery_success                                [PASS]
+  192. test_convoy_result_has_forward_and_return_check             [PASS]
+  193. test_convoy_return_check_phoenix_closed                     [PASS]
+  194. test_convoy_falls_back_when_repair_missing                  [PASS]
+  195. test_convoy_falls_back_when_truth_not_verified              [PASS]
+  196. test_convoy_falls_back_when_certification_missing           [PASS]
+  197. test_return_check_reopen_outcomes_exhaust_and_rollback[...  [PASS]
+  198. test_return_check_reopen_outcomes_exhaust_and_rollback[...  [PASS]
+  199. test_return_check_reopen_outcomes_exhaust_and_rollback[...  [PASS]
+  200. test_return_check_false_alarm_passes                        [PASS]
+  201. test_return_check_problem_gone_passes                       [PASS]
+  202. test_return_check_none_outcome_passes                       [PASS]
+  203. test_return_check_warrior_holds_when_spreading              [PASS]
+  204. test_rollback_fails_gracefully_no_checkpoint                [PASS]
+  205. test_rollback_used_directly_for_trigger                     [PASS]
+  206. test_convoy_standalone_success                              [PASS]
+  207. test_convoy_standalone_forward_fail                         [PASS]
+
+  FILE: test_report.py
+  --------------------------------------------------------------------------
+  208. test_report_contains_incident_id                            [PASS]
+  209. test_report_contains_project_id                             [PASS]
+  210. test_report_contains_incident_type                          [PASS]
+  211. test_report_contains_source                                 [PASS]
+  212. test_report_contains_severity                               [PASS]
+  213. test_report_contains_header                                 [PASS]
+  214. test_report_contains_what_it_touched                        [PASS]
+  215. test_report_contains_repair_action                          [PASS]
+  216. test_report_contains_prevention_rule                        [PASS]
+  217. test_report_contains_hunter_rescan_outcome                  [PASS]
+  218. test_report_shows_not_yet_performed_when_no_rescan          [PASS]
+  219. test_report_shows_yes_for_repeat_risk                       [PASS]
+  220. test_report_shows_no_for_false_flags                        [PASS]
+  221. test_report_shows_status_closed                             [PASS]
+  222. test_report_handles_empty_what_it_touched                   [PASS]
+  223. test_report_handles_missing_optional_fields                 [PASS]
+
+  FILE: test_rule_of_three.py
+  --------------------------------------------------------------------------
+  224. test_rule_of_three_success_path_reaches_trusted_state       [PASS]
+  225. test_rule_of_three_verification_failure_quarantines         [PASS]
+  226. test_rule_of_three_cannot_skip_reverification               [PASS]
+  227. test_rule_of_three_unknown_cannot_be_certified              [PASS]
+
+  FILE: test_self_healing.py
+  --------------------------------------------------------------------------
+  228. TestCorruptionDetectionSLA::test_single_bit_flip_detect...  [PASS]
+  229. TestCorruptionDetectionSLA::test_bulk_corruption_fully_...  [PASS]
+  230. TestRepairIntroducesNoNewCorruption::test_healed_blocks...  [PASS]
+  231. TestRepairIntroducesNoNewCorruption::test_repair_does_n...  [PASS]
+  232. TestIdempotentRepair::test_healing_twice_gives_same_result  [PASS]
+  233. TestIdempotentRepair::test_is_idempotent_repair_check       [PASS]
+  234. TestIdempotentRepair::test_ecc_decode_idempotent            [PASS]
+  235. TestAuditTrailTamperEvident::test_audit_chain_valid_aft...  [PASS]
+  236. TestAuditTrailTamperEvident::test_audit_chain_includes_...  [PASS]
+  237. TestAuditTrailTamperEvident::test_replica_sync_self_hea...  [PASS]
+
+  FILE: test_space_environments.py
+  --------------------------------------------------------------------------
+  238. TestDeepSpaceConnectivity::test_offline_write_survives_...  [PASS]
+  239. TestDeepSpaceConnectivity::test_deferred_sync_after_rec...  [PASS]
+  240. TestCosmicRadiation::test_single_bit_flip_detected          [PASS]
+  241. TestCosmicRadiation::test_double_bit_flip_detected          [PASS]
+  242. TestCosmicRadiation::test_bit_flip_at_rest_detected_by_...  [PASS]
+  243. TestCosmicRadiation::test_ecc_recovers_from_single_shar...  [PASS]
+  244. TestCosmicRadiation::test_ecc_detects_shard_inconsistency   [PASS]
+  245. TestExtremeTemperature::test_bulk_corruption_all_detected   [PASS]
+  246. TestExtremeTemperature::test_healthy_blocks_unaffected_...  [PASS]
+  247. TestHighRadiation::test_self_heal_from_replica[5]           [PASS]
+  248. TestHighRadiation::test_self_heal_from_replica[20]          [PASS]
+  249. TestHighRadiation::test_self_heal_from_replica[40]          [PASS]
+  250. TestMarsLatency::test_fire_and_forget_deferred_verifica...  [PASS]
+  251. TestZeroGVibration::test_crash_leaves_no_partial_record     [PASS]
+  252. TestPowerCycling::test_atomic_commit_after_power_cycle[1]   [PASS]
+  253. TestPowerCycling::test_atomic_commit_after_power_cycle[2]   [PASS]
+  254. TestPowerCycling::test_atomic_commit_after_power_cycle[3]   [PASS]
+  255. TestPowerCycling::test_atomic_commit_after_power_cycle[4]   [PASS]
+  256. TestPowerCycling::test_atomic_commit_after_power_cycle[5]   [PASS]
+
+  FILE: test_system.py
+  --------------------------------------------------------------------------
+  257. test_system_config_requires_three_verification_passes       [PASS]
+  258. test_system_config_threshold_order_must_be_valid            [PASS]
+  259. test_trust_gate_success_path_reaches_law                    [PASS]
+  260. test_trust_gate_verification_failure_is_quarantined         [PASS]
+  261. test_trust_gate_unknown_source_is_quarantined_by_default    [PASS]
+  262. test_trust_gate_clip_rejection_stays_untrusted              [PASS]
+  263. test_quarantine_transition_rules_enforced                   [PASS]
+  264. test_proof_ledger_integrity_detects_tampering               [PASS]
+  265. test_heartbeat_monitor_levels                               [PASS]
+  266. test_proof_ledger_links_previous_hash_chain                 [PASS]
+
+==============================================================================
+  TOTAL: 266 tests   PASSED: 266   FAILED: 0   WARNINGS: 0
+==============================================================================
