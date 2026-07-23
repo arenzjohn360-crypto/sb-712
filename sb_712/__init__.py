@@ -51,6 +51,25 @@ from .system import (
     HeartbeatMonitor,
     TrustGatePipeline,
 )
+from .silent_intercept import (
+    InterceptPhase,
+    InterceptDecision,
+    ThreatBehaviourRecord,
+    SilentInterceptResult,
+    SilentInterceptNode,
+)
+from .agentive_intelligence import (
+    AgentiveClassifier,
+    ThreatAssessment,
+    CalibrationRecord,
+)
+from .heartbeat_rhythm import (
+    RhythmStatus,
+    RhythmAction,
+    HeartbeatPulse,
+    RhythmReport,
+    HeartRhythm,
+)
 from .security import (
     EncryptedAuditRecord,
     EncryptedAuditTrail,
@@ -133,4 +152,20 @@ __all__ = [
     "WindowsServiceInstallerBlueprint",
     "render_env_template",
     "build_runtime_manifest",
+    # T-800 Silent Intercept
+    "InterceptPhase",
+    "InterceptDecision",
+    "ThreatBehaviourRecord",
+    "SilentInterceptResult",
+    "SilentInterceptNode",
+    # Agentive Intelligence
+    "AgentiveClassifier",
+    "ThreatAssessment",
+    "CalibrationRecord",
+    # Heartbeat Rhythm
+    "RhythmStatus",
+    "RhythmAction",
+    "HeartbeatPulse",
+    "RhythmReport",
+    "HeartRhythm",
 ]
