@@ -17,6 +17,8 @@ All seeds are saved in every result so any run can be replayed exactly.
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
 import time
 from pathlib import Path
@@ -84,6 +86,7 @@ class ValidationRunner:
         # ---- 4. Inject fault ----
         injector = FaultInjector(seed=seed)
         fault_type, fault_target = self._inject(injector, braid, scenario)
+        self._inject_checkpoint_fault_if_needed(injector, scenario, snapshot)
 
         # ---- 5. Process with fault active ----
         t_recovery_start = time.perf_counter()
@@ -254,3 +257,30 @@ class ValidationRunner:
         if handler:
             return handler()  # type: ignore[return-value]
         return "none", "none"
+
+    def _inject_checkpoint_fault_if_needed(
+        self,
+        injector: FaultInjector,
+        scenario: str,
+        snapshot: dict,
+    ) -> None:
+        method = SCENARIOS.get(scenario, "")
+        if method not in {"disk_write_interrupt", "partial_checkpoint"}:
+            return
+
+        corrupted = dict(snapshot)
+        if method == "disk_write_interrupt":
+            corrupted = injector.disk_write_interrupt(corrupted)
+        elif method == "partial_checkpoint":
+            corrupted = injector.partial_checkpoint(corrupted)
+
+        # Checkpoint filenames are millisecond-based; avoid overwriting the
+        # healthy checkpoint saved earlier in the run.
+        time.sleep(0.001)
+
+        # Persist a newer checkpoint whose envelope seal is intentionally wrong.
+        # load_latest() will skip it and fall back to the previous healthy one.
+        path = self._cp.save(_PROJECT_ID, corrupted)
+        envelope = json.loads(path.read_text(encoding="utf-8"))
+        envelope["seal"] = hashlib.sha256(b"SB712_CORRUPTED_CHECKPOINT").hexdigest()
+        path.write_text(json.dumps(envelope, indent=2), encoding="utf-8")

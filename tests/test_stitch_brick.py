@@ -34,6 +34,7 @@ from stitch_brick import (
     VerificationGate,
 )
 from stitch_brick.brick import BrickModule, BrickOutput
+from stitch_brick.disk_io import CheckpointDiskManager
 from stitch_brick.metrics import MetricsCollector
 
 
@@ -343,6 +344,26 @@ class TestValidationRunner:
     def test_network_delay(self, tmp_runner: ValidationRunner) -> None:
         result = tmp_runner.run_single_test("network_delay", test_id=0, seed=7)
         self._assert_pass(result, "network_delay")
+
+    @pytest.mark.parametrize("scenario", ["disk_write_interrupt", "partial_checkpoint"])
+    def test_checkpoint_faults_use_fallback_checkpoint(
+        self, tmp_path: Path, scenario: str
+    ) -> None:
+        runner = ValidationRunner(root=tmp_path)
+        result = runner.run_single_test(scenario, test_id=0, seed=21)
+        self._assert_pass(result, scenario)
+
+        cp = CheckpointDiskManager(tmp_path)
+        files = sorted((tmp_path / "checkpoints").glob("sb712-validation_*.json"))
+        assert len(files) >= 2, f"{scenario}: expected healthy + corrupted checkpoints"
+
+        latest_raw = cp.load_latest_raw("sb712-validation")
+        latest_verified = cp.load_latest("sb712-validation")
+        assert latest_raw is not None
+        assert latest_verified is not None
+        assert latest_raw != latest_verified, (
+            f"{scenario}: latest checkpoint should be corrupted and skipped"
+        )
 
     def test_dependency_failure(self, tmp_runner: ValidationRunner) -> None:
         result = tmp_runner.run_single_test("dependency_failure", test_id=0, seed=8)
